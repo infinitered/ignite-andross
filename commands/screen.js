@@ -46,7 +46,7 @@ module.exports = async function (context) {
 
     // insert screen import
     ignite.patchInFile(appNavFilePath, {
-      after: 'import { StackNavigator } from',
+      after: `import\s+.*?\s+from\s+'react-navigation';?`,
       insert: importToAdd
     })
 
