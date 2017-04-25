@@ -2,10 +2,8 @@
 
 module.exports = async function (context) {
   // grab some features
-  const { parameters, strings, print, ignite } = context
-  const { pascalCase, isBlank } = strings
-  const config = ignite.loadIgniteConfig()
-  const { paths, tests } = config
+  const { parameters, print, ignite, strings: { pascalCase, isBlank } } = context
+  const { paths, tests } = ignite.loadIgniteConfig()
 
   // validation
   if (isBlank(parameters.first)) {

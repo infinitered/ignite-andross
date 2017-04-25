@@ -17,7 +17,7 @@ module.exports = async function (context) {
 
   const name = pascalCase(parameters.first)
   const props = { name }
-  const containerPath = `${paths.app}/${paths.container}`
+  const containerPath = `${paths.app}/${paths.containers}`
   const containerStylesPath = `${containerPath}/Styles`
   const navigationPath = `${paths.app}/${paths.navigation}`
 
