@@ -16,7 +16,6 @@ module.exports = async function (context) {
   const name = pascalCase(parameters.first)
   const props = { name }
   const componentPath = `${paths.app}/${paths.components}`
-  console.dir(paths, {colors: true})
   const componentStylesPath = `${componentPath}/Styles`
   const testsPath = `${paths.tests}/${paths.components}`
 
