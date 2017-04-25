@@ -6,7 +6,7 @@ module.exports = async function (context) {
   // grab some features
   const { parameters, strings, print, ignite, filesystem } = context
   const { pascalCase, isBlank } = strings
-  const config = ignite.loadIgniteConfig()
+  const { navigation, paths } = ignite.loadIgniteConfig()
 
   // validation
   if (isBlank(parameters.first)) {
@@ -17,15 +17,18 @@ module.exports = async function (context) {
 
   const name = pascalCase(parameters.first)
   const props = { name }
+  const containerPath = `${paths.app}/${paths.containers}`
+  const containerStylesPath = `${containerPath}/Styles`
+  const navigationPath = `${paths.app}/${paths.navigation}`
 
   const jobs = [
     {
       template: 'container.ejs',
-      target: `App/Containers/${name}.js`
+      target: `${containerPath}/${name}.js`
     },
     {
       template: 'container-style.ejs',
-      target: `App/Containers/Styles/${name}Style.js`
+      target: `${containerStylesPath}/${name}Style.js`
     }
   ]
 
@@ -33,10 +36,10 @@ module.exports = async function (context) {
 
   // if using `react-navigation` go the extra step
   // and insert the container into the nav router
-  if (config.navigation === 'react-navigation') {
+  if (navigation === 'react-navigation') {
     const containerName = name
-    const appNavFilePath = `${process.cwd()}/App/Navigation/AppNavigation.js`
-    const importToAdd = `import ${containerName} from '../Containers/${containerName}'`
+    const appNavFilePath = `${process.cwd()}/${navigationPath}/AppNavigation.js`
+    const importToAdd = `import ${containerName} from '../${paths.containers}/${containerName}'`
     const routeToAdd = `  ${containerName}: { screen: ${containerName} },`
 
     if (!filesystem.exists(appNavFilePath)) {

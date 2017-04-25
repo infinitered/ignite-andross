@@ -4,7 +4,7 @@ module.exports = async function (context) {
   // grab some features
   const { parameters, ignite, strings, print } = context
   const { isBlank, pascalCase } = strings
-  const config = ignite.loadIgniteConfig()
+  const { tests, paths } = ignite.loadIgniteConfig()
 
   // validation
   if (isBlank(parameters.first)) {
@@ -16,11 +16,11 @@ module.exports = async function (context) {
   const name = pascalCase(parameters.first)
   const props = { name }
 
-  const jobs = [{ template: `redux.ejs`, target: `App/Redux/${name}Redux.js` }]
-  if (config.tests) {
+  const jobs = [{ template: `redux.ejs`, target: `${paths.app}/${paths.redux || 'Redux'}/${name}Redux.js` }]
+  if (tests) {
     jobs.push({
-      template: `redux-test-${config.tests}.ejs`,
-      target: `Tests/Redux/${name}ReduxTest.js`
+      template: `redux-test-${tests}.ejs`,
+      target: `${paths.app}/${paths.redux || 'Redux'}/${name}ReduxTest.js`
     })
   }
 

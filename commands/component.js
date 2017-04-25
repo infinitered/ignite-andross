@@ -5,7 +5,7 @@ module.exports = async function (context) {
   const { parameters, strings, print, ignite } = context
   const { pascalCase, isBlank } = strings
   const config = ignite.loadIgniteConfig()
-  const { tests } = config
+  const { paths, tests } = config
 
   // validation
   if (isBlank(parameters.first)) {
@@ -17,19 +17,24 @@ module.exports = async function (context) {
   // read some configuration
   const name = pascalCase(parameters.first)
   const props = { name }
+  const componentPath = `${paths.app}/${paths.components}`
+  console.dir(paths, {colors: true})
+  const componentStylesPath = `${componentPath}/Styles`
+  const testsPath = `${paths.tests}/${paths.components}`
+
   const jobs = [
     {
       template: 'component.ejs',
-      target: `App/Components/${name}.js`
+      target: `${componentPath}/${name}.js`
     },
     {
       template: 'component-style.ejs',
-      target: `App/Components/Styles/${name}Style.js`
+      target: `${componentStylesPath}/${name}Style.js`
     },
     tests === 'ava' &&
       {
         template: 'component-test.ejs',
-        target: `Test/Components/${name}Test.js`
+        target: `${testsPath}/${name}Test.js`
       }
   ]
 

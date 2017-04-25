@@ -4,8 +4,7 @@ module.exports = async function (context) {
   // grab some features
   const { parameters, ignite, print, strings } = context
   const { pascalCase, isBlank } = strings
-  const config = ignite.loadIgniteConfig()
-  const { tests } = config
+  const { tests, paths } = ignite.loadIgniteConfig()
 
   // validation
   if (isBlank(parameters.first)) {
@@ -17,11 +16,11 @@ module.exports = async function (context) {
   const name = pascalCase(parameters.first)
   const props = { name }
 
-  const jobs = [{ template: `saga.ejs`, target: `App/Sagas/${name}Sagas.js` }]
+  const jobs = [{ template: `saga.ejs`, target: `${paths.app}/${paths.sagas || 'Sagas'}/${name}Sagas.js` }]
   if (tests) {
     jobs.push({
       template: `saga-test-${tests}.ejs`,
-      target: `Tests/Saga/${name}SagaTest.js`
+      target: `${paths.tests}/${paths.sagas || 'Sagas'}/${name}SagaTest.js`
     })
   }
 
