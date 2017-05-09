@@ -6,5 +6,16 @@
     "redux",
     "saga",
     "screen"
-  ]
+  ],
+  "paths": {
+    "app": "App",
+    "tests": "Tests",
+    "components": "Components",
+    "config": "Config",
+    "containers": "Containers",
+    "fixtures": "Fixtures",
+    "images": "Images",
+    "navigation": "Navigation",
+    "services": "Services"
+  }
 }

@@ -6,7 +6,7 @@ module.exports = async function (context) {
   // grab some features
   const { print, parameters, strings, ignite, filesystem } = context
   const { pascalCase, isBlank } = strings
-  const config = ignite.loadIgniteConfig()
+  const { navigation, paths } = ignite.loadIgniteConfig()
 
   // validation
   if (isBlank(parameters.first)) {
@@ -17,6 +17,9 @@ module.exports = async function (context) {
 
   const name = pascalCase(parameters.first)
   const props = { name }
+  const containerPath = `${paths.app}/${paths.containers}`
+  const containerStylesPath = `${containerPath}/Styles`
+  const navigationPath = `${paths.app}/${paths.navigation}`
 
   // which type of layout?
   const typeMessage = 'What kind of ListView would you like to generate?'
@@ -63,11 +66,11 @@ module.exports = async function (context) {
   const jobs = [
     {
       template: `${componentTemplate}.ejs`,
-      target: `App/Containers/${name}.js`
+      target: `${containerPath}/${name}.js`
     },
     {
       template: `${styleTemplate}.ejs`,
-      target: `App/Containers/Styles/${name}Style.js`
+      target: `${containerStylesPath}/${name}Style.js`
     }
   ]
 
@@ -75,10 +78,10 @@ module.exports = async function (context) {
 
   // if using `react-navigation` go the extra step
   // and insert the screen into the nav router
-  if (config.navigation === 'react-navigation') {
+  if (navigation === 'react-navigation') {
     const screenName = `${name}`
-    const appNavFilePath = `${process.cwd()}/App/Navigation/AppNavigation.js`
-    const importToAdd = `import ${screenName} from '../Containers/${screenName}'`
+    const appNavFilePath = `${process.cwd()}/${navigationPath}/AppNavigation.js`
+    const importToAdd = `import ${screenName} from '../${paths.components}/${screenName}'`
     const routeToAdd = `  ${screenName}: { screen: ${screenName} },`
 
     if (!filesystem.exists(appNavFilePath)) {
