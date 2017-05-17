@@ -1,5 +1,7 @@
 # Ignite IR Next
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/infinitered/ignite-ir-next.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://semaphoreci.com/api/v1/ir/ignite-ir-next/branches/master/badge.svg)](https://semaphoreci.com/ir/ignite-ir-next)
 
 ## The latest and greatest boilerplate for Infinite Red opinions
