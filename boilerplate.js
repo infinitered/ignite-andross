@@ -42,7 +42,7 @@ async function install (context) {
 
   const name = parameters.third
   const spinner = print
-    .spin(`using the ${print.colors.red('Infinite Red')} boilerplate`)
+    .spin(`using the ${print.colors.red('Infinite Red Next (experimental)')} boilerplate`)
     .succeed()
 
   // attempt to install React Native or die trying
@@ -177,6 +177,12 @@ async function install (context) {
 
     if (answers['animatable'] === 'react-native-animatable') {
       await system.spawn(`ignite add animatable ${debugFlag}`, {
+        stdio: 'inherit'
+      })
+    }
+
+    if (parameters.options.lint !== 'false') {
+      await system.spawn(`ignite add standard ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
