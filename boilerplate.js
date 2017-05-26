@@ -158,33 +158,50 @@ async function install (context) {
   // NOTE(steve): I'm re-adding this here because boilerplates now hold permanent files
   // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
   try {
-    await system.spawn(`ignite add ${__dirname} ${debugFlag}`, { stdio: 'inherit' })
+    // **** START OF DANGERZONE ****
+    // NOTE(steve): https://github.com/infinitered/ignite-ir-boilerplate/issues/63
+    //
+    // Problem with using ${__dirname} is that it puts a full path in the project's
+    // package.json.  You usually never want this.  Unless you're an ignite dev.  =)
+    //
+    // Leaving it as the hardcoded name, still gives your IGNITE_PLUGIN_PATH a chance to
+    // do the right thing.
+    //
+    // So I'm switching this back to hardcoded for now.
+    //
+    // PS: the reason this is a thing at all is because the generators are inside the
+    // boilerplate. So we add this as a dev dependency, so generators can stay up-to-date.
+    //
+    await system.spawn(`ignite add ignite-ir-boilerplate ${debugFlag}`, { stdio: 'inherit' })
+    //
+    // **** END OF DANGERZONE ****
+    // await system.spawn(`ignite add ${__dirname} ${debugFlag}`, { stdio: 'inherit' })
 
     // now run install of Ignite Plugins
     if (answers['dev-screens'] === 'Yes') {
-      await system.spawn(`ignite add dev-screens@"~>2.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add dev-screens@2.x.x ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (answers['vector-icons'] === 'react-native-vector-icons') {
-      await system.spawn(`ignite add vector-icons@"~>1.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add vector-icons@1.x.x ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (answers['i18n'] === 'react-native-i18n') {
-      await system.spawn(`ignite add i18n@"~>1.0.0" ${debugFlag}`, { stdio: 'inherit' })
+      await system.spawn(`ignite add i18n@1.x.x ${debugFlag}`, { stdio: 'inherit' })
     }
 
     if (answers['animatable'] === 'react-native-animatable') {
-      await system.spawn(`ignite add animatable@"~>1.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add animatable@1.x.x ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (parameters.options.lint !== 'false') {
-      await system.spawn(`ignite add standard@"~>1.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add standard@1.x.x ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
