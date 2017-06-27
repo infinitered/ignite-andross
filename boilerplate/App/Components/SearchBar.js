@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import styles from './Styles/SearchBarStyles'
 import { Colors, Metrics } from '../Themes/'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-export default class SearchBar extends React.Component {
+export default class SearchBar extends Component {
   static propTypes = {
     onSearch: React.PropTypes.func.isRequired,
     onCancel: React.PropTypes.func.isRequired,
