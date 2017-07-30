@@ -86,7 +86,8 @@ async function install (context) {
     { template: 'ignite.json.ejs', target: 'ignite/ignite.json' },
     { template: '.editorconfig', target: '.editorconfig' },
     { template: '.babelrc', target: '.babelrc' },
-    { template: 'Tests/Setup.js.ejs', target: 'Tests/Setup.js' }
+    { template: 'Tests/Setup.js.ejs', target: 'Tests/Setup.js' },
+    { template: '.env.example', target: '.env.example' },
   ]
   const templateProps = {
     name,
