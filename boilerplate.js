@@ -87,7 +87,7 @@ async function install (context) {
     { template: '.editorconfig', target: '.editorconfig' },
     { template: '.babelrc', target: '.babelrc' },
     { template: 'Tests/Setup.js.ejs', target: 'Tests/Setup.js' },
-    { template: '../.env.example', target: '../.env.example' }
+    { template: '../.env.example', target: '../.env.example' },
   ]
   const templateProps = {
     name,
@@ -107,6 +107,10 @@ async function install (context) {
    */
   // https://github.com/facebook/react-native/issues/12724
   filesystem.appendAsync('.gitattributes', '*.bat text eol=crlf')
+  filesystem.append('.gitignore', '\n# Misc\n#')
+  filesystem.append('.gitignore', '\n.env.example\n')
+  filesystem.append('.gitignore', '.env\n')
+
 
   /**
    * Merge the package.json from our template into the one provided from react-native init.
