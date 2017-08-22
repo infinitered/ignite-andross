@@ -54,7 +54,7 @@ async function install (context) {
   // remove the __tests__ directory that come with React Native
   filesystem.remove('__tests__')
 
-  // copy our App & Tests directories
+  // copy our App, Tests & storybook directories
   spinner.text = '▸ copying files'
   spinner.start()
   filesystem.copy(`${__dirname}/boilerplate/App`, `${process.cwd()}/App`, {
@@ -62,6 +62,10 @@ async function install (context) {
     matching: '!*.ejs'
   })
   filesystem.copy(`${__dirname}/boilerplate/Tests`, `${process.cwd()}/Tests`, {
+    overwrite: true,
+    matching: '!*.ejs'
+  })
+  filesystem.copy(`${__dirname}/boilerplate/storybook`, `${process.cwd()}/storybook`, {
     overwrite: true,
     matching: '!*.ejs'
   })
@@ -88,6 +92,7 @@ async function install (context) {
     { template: '.babelrc', target: '.babelrc' },
     { template: 'Tests/Setup.js.ejs', target: 'Tests/Setup.js' },
     { template: '../.env.example', target: '../.env.example' },
+    { template: 'storybook/storybook.ejs', target: 'storybook/storybook.js' }
   ]
   const templateProps = {
     name,
