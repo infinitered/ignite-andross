@@ -116,7 +116,6 @@ async function install (context) {
   filesystem.append('.gitignore', '\n.env.example\n')
   filesystem.append('.gitignore', '.env\n')
 
-
   /**
    * Merge the package.json from our template into the one provided from react-native init.
    */
