@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga'
 import RehydrationServices from '../Services/RehydrationServices'
 import ReduxPersist from '../Config/ReduxPersist'
 import ScreenTracking from './ScreenTrackingMiddleware'
+import { composeWithDevTools } from 'remote-redux-devtools'
 
 // creates the store
 export default (rootReducer, rootSaga) => {
@@ -35,6 +36,7 @@ export default (rootReducer, rootSaga) => {
 
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
   const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore
+  const composer = Config.useReduxDevTools ? composeWithDevTools({hostname: Config.reduxDevToolsHostname, port: Config.reduxDevToolsPort }) : compose
   const store = createAppropriateStore(rootReducer, compose(...enhancers))
 
   // configure persistStore and check reducer version number
