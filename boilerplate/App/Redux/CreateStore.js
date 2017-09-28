@@ -36,7 +36,7 @@ export default (rootReducer, rootSaga) => {
 
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
   const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore
-  const composer = Config.useReduxDevTools ? composeWithDevTools({hostname: Config.reduxDevToolsHostname, port: Config.reduxDevToolsPort }) : compose
+  const composer = Config.useReduxDevTools ? composeWithDevTools({hostname: 'remotedev.io'}) : compose
   const store = createAppropriateStore(rootReducer, compose(...enhancers))
 
   // configure persistStore and check reducer version number
