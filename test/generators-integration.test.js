@@ -38,6 +38,14 @@ describe('generators', () => {
     expect(lint.stderr).toBe('')
   })
 
+  test('generates a component in sub folder', async () => {
+    await execa(IGNITE, ['g', 'component', 'My/SubFolder/Test'], { preferLocal: false })
+    expect(jetpack.exists('App/Components/My/SubFolder/Test.js')).toBe('file')
+    expect(jetpack.exists('App/Components/My/SubFolder/Styles/TestStyle.js')).toBe('file')
+    const lint = await execa('npm', ['-s', 'run', 'lint'])
+    expect(lint.stderr).toBe('')
+  })
+
   test('generate listview of type row works', async () => {
     await execa(IGNITE, ['g', 'list', 'TestRow', '--type=Row', '--codeType=listview', '--dataType=Single'], { preferLocal: false })
     expect(jetpack.exists('App/Containers/TestRow.js')).toBe('file')
