@@ -15,21 +15,23 @@ module.exports = async function (context) {
   }
 
   // read some configuration
-  const name = pascalCase(parameters.first)
+  let pathComponents = parameters.first.split('/').map(pascalCase)
+  const name = pathComponents.pop()
+  const subFolder = pathComponents.length ? pathComponents.join('/') + '/' : ''
   const props = { name }
   const jobs = [
     {
       template: 'component.ejs',
-      target: `App/Components/${name}.js`
+      target: `App/Components/${subFolder}${name}.js`
     },
     {
       template: 'component-style.ejs',
-      target: `App/Components/Styles/${name}Style.js`
+      target: `App/Components/${subFolder}Styles/${name}Style.js`
     },
     tests === 'ava' &&
       {
         template: 'component-test.ejs',
-        target: `Test/Components/${name}Test.js`
+        target: `Test/Components/${subFolder}${name}Test.js`
       }
   ]
 
