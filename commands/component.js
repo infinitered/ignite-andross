@@ -7,31 +7,35 @@ module.exports = async function (context) {
   const config = ignite.loadIgniteConfig()
   const { tests } = config
 
+  const options = parameters.options || {}
+
+  const hasFolder = !isBlank(options.folder)
+
   // validation
-  if (isBlank(parameters.first)) {
+  if (isBlank(parameters.first) && !hasFolder) {
     print.info(`${context.runtime.brand} generate component <name>\n`)
     print.info('A name is required.')
     return
   }
 
-  // read some configuration
-  const name = pascalCase(parameters.first)
+  let componentPath = hasFolder ? `${options.folder}/${parameters.first || 'index'}` : parameters.first
+
+  let pathComponents = componentPath.split('/').map(pascalCase)
+  let name = pathComponents.pop()
+  if (name === 'Index') { name = 'index' }
+  const relativePath = pathComponents.length ? pathComponents.join('/') + '/' : ''
+
   const props = { name }
-  const jobs = [
-    {
-      template: 'component.ejs',
-      target: `App/Components/${name}.js`
-    },
-    {
-      template: 'component-style.ejs',
-      target: `App/Components/Styles/${name}Style.js`
-    },
-    tests === 'ava' &&
-      {
-        template: 'component-test.ejs',
-        target: `Test/Components/${name}Test.js`
-      }
-  ]
+  const jobs = [{
+    template: 'component.ejs',
+    target: `App/Components/${relativePath}${name}.js`
+  }, {
+    template: 'component-style.ejs',
+    target: `App/Components/${relativePath}Styles/${name}Style.js`
+  }, tests === 'ava' && {
+    template: 'component-test.ejs',
+    target: `Test/Components/${relativePath}${name}Test.js`
+  }]
 
   await ignite.copyBatch(context, jobs, props)
 }
