@@ -10,7 +10,7 @@ function ReduxNavigation (props) {
   const navigation = ReactNavigation.addNavigationHelpers({
     dispatch,
     state: nav,
-    addListener: createReduxBoundAddListener("root")
+    addListener: createReduxBoundAddListener('root')
   })
 
   return <AppNavigation navigation={navigation} />

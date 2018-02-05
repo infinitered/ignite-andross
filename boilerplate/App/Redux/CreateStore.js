@@ -13,8 +13,8 @@ export default (rootReducer, rootSaga) => {
 
   /* ------------- Navigation Middlewate ------------ */
   const navigationMiddleware = createReactNavigationReduxMiddleware(
-    "root",
-    state => state.nav,
+    'root',
+    state => state.nav
   )
   middleware.push(navigationMiddleware)
 
