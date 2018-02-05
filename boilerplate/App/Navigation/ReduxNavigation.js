@@ -7,30 +7,26 @@ import AppNavigation from './AppNavigation'
 // here is our redux-aware smart component
 
 class ReduxNavigation extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentWillMount() {
+  componentWillMount () {
     if (Platform.OS === 'ios') return
     BackHandler.addEventListener('hardwareBackPress', () => {
-      const { dispatch, navigation, nav } = this.props;
-      //change to whatever is your first screen, otherwise unpredictable results may occur 
+      const { dispatch, nav } = this.props
+      // change to whatever is your first screen, otherwise unpredictable results may occur
       if (nav.routes.length === 1 && (nav.routes[0].routeName === 'LaunchScreen')) {
-        return false;
+        return false
       }
       // if (shouldCloseApp(nav)) return false
-      dispatch({ type: 'Navigation/BACK' });
-      return true;
+      dispatch({ type: 'Navigation/BACK' })
+      return true
     })
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     if (Platform.OS === 'ios') return
-    BackHandler.removeEventListener('hardwareBackPress');
+    BackHandler.removeEventListener('hardwareBackPress')
   }
 
-  render() {
+  render () {
     return <AppNavigation navigation={addNavigationHelpers({ dispatch: this.props.dispatch, state: this.props.nav })} />
   }
 }
