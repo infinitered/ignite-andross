@@ -1,10 +1,19 @@
 import React from 'react'
 import { BackHandler, Platform } from 'react-native'
+import * as ReactNavigation from 'react-navigation'
+import { createReduxBoundAddListener } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 import { addNavigationHelpers } from 'react-navigation'
 import AppNavigation from './AppNavigation'
 
 // here is our redux-aware smart component
+function ReduxNavigation (props) {
+  const { dispatch, nav } = props
+  const navigation = ReactNavigation.addNavigationHelpers({
+    dispatch,
+    state: nav,
+    addListener: createReduxBoundAddListener('root')
+  })
 
 class ReduxNavigation extends React.Component {
   componentWillMount () {
