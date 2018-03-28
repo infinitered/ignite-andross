@@ -11,7 +11,11 @@ export default (rootReducer, rootSaga) => {
   const middleware = []
   const enhancers = []
 
+<<<<<<< HEAD
   /* ------------- Navigation Middlewate ------------ */
+=======
+  /* ------------- Navigation Middleware ------------ */
+>>>>>>> 28be859dbb140c4696781fc120df40d39fd985cc
   const navigationMiddleware = createReactNavigationReduxMiddleware(
     'root',
     state => state.nav
