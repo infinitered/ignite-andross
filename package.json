@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": "infinitered/ignite-ir-boilerplate-andross",
   "homepage": "https://github.com/infinitered/ignite-ir-boilerplate-andross",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "files": [
     "boilerplate",
     "commands",

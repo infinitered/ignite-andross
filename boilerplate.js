@@ -169,7 +169,7 @@ async function install (context) {
   try {
     // boilerplate adds itself to get plugin.js/generators etc
     // Could be directory, npm@version, or just npm name.  Default to passed in values
-    const boilerplate = parameters.options.b || parameters.options.boilerplate || 'ignite-ir-boilerplate'
+    const boilerplate = parameters.options.b || parameters.options.boilerplate || 'ignite-ir-boilerplate-andross'
 
     await system.spawn(`ignite add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
 
@@ -241,7 +241,7 @@ async function install (context) {
       react-native run-android${androidInfo}
       ignite --help
 
-    ${gray('Read the walkthrough at https://github.com/infinitered/ignite-ir-boilerplate/blob/master/readme.md#boilerplate-walkthrough')}
+    ${gray('Read the walkthrough at https://github.com/infinitered/ignite-ir-boilerplate-andross/blob/master/readme.md#boilerplate-walkthrough')}
 
     ${blue('Need additional help? Join our Slack community at http://community.infinite.red.')}
 
