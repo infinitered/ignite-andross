@@ -14,11 +14,6 @@
     "android:logcat": "$ANDROID_HOME/platform-tools/adb logcat *:S ReactNative:V ReactNativeJS:V",
     "android:shake": "$ANDROID_HOME/platform-tools/adb devices | grep '\\t' | awk '{print $1}' | sed 's/\\s//g' | xargs -I {} $ANDROID_HOME/platform-tools/adb -s {} shell input keyevent 82",
     "storybook": "storybook start -p 7007"
-    <% /* Commented out to disable tests until Enzyme becomes compatible with newer React Native versions:
-    ,
-    "precommit": "npm run git-hook",
-    "prepush": "npm run git-hook",
-    "git-hook": "npm test -s" */ %>
   },
   "dependencies": {
     "apisauce": "^0.14.2",
@@ -48,7 +43,6 @@
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "mockery": "^2.1.0",
-    "husky": "^0.14.3",
     "babel-plugin-ignite-ignore-reactotron": "^0.3.0",
     "react-dom": "16.3.0",
     "reactotron-react-native": "^2.0.0-alpha.3",
