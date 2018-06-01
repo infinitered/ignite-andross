@@ -58,7 +58,7 @@ describe('generators', () => {
     expect(lint.stderr).toBe('')
   })
 
-  test('generates a component in a relative path', async() => {
+  test('generates a component in a relative path', async () => {
     await execa(IGNITE, ['g', 'component', 'My/SubFolder/Test'], { preferLocal: false })
     expect(jetpack.exists('App/Components/My/SubFolder/Test.js')).toBe('file')
     expect(jetpack.exists('App/Components/My/SubFolder/Styles/TestStyle.js')).toBe('file')
