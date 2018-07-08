@@ -1,4 +1,4 @@
-<p align="center"><img src="http://ir_public.s3.amazonaws.com/projects/ignite/ignite-bowser-launch-screen.png" alt="logo" width="414px"></p>
+<p align="center"><img src="http://ir_public.s3.amazonaws.com/projects/ignite/ignite-andross-launch-screen.png" alt="logo" width="414px"></p>
 
 # Ignite IR Boilerplate ("Andross")
 
