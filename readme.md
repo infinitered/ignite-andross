@@ -1,12 +1,11 @@
+<p align="center"><img src="http://ir_public.s3.amazonaws.com/projects/ignite/ignite-bowser-launch-screen.png" alt="logo" width="414px"></p>
+
 # Ignite IR Boilerplate ("Andross")
 
 [![Build Status](https://semaphoreci.com/api/v1/ir/ignite-ir-boilerplate-andross/branches/master/badge.svg)](https://semaphoreci.com/ir/ignite-ir-boilerplate-andross)
 
 
-
-## The latest and greatest boilerplate for Infinite Red opinions
-
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
+## The tried and true boilerplate for [Infinite Red](https://infinite.red) opinions
 
 Currently includes:
 
@@ -15,6 +14,7 @@ Currently includes:
 * Redux
 * Redux Sagas
 * And more!
+
 
 ## Quick Start
 
@@ -153,6 +153,7 @@ If you would like to have the `ignite generate` command include the generation o
 **Previous Boilerplates**
 
 * [2016 aka Ignite 1.0](https://github.com/infinitered/ignite-ir-boilerplate-2016)
+
 
 ## Premium Support
 
