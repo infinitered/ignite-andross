@@ -1,20 +1,20 @@
-# Ignite IR Boilerplate
+<p align="center"><img src="http://ir_public.s3.amazonaws.com/projects/ignite/ignite-andross-launch-screen.png" alt="logo" width="414px"></p>
 
-[![Build Status](https://semaphoreci.com/api/v1/ir/ignite-ir-boilerplate/branches/master/badge.svg)](https://semaphoreci.com/ir/ignite-ir-boilerplate)
+# Ignite IR Boilerplate ("Andross")
+
+[![Build Status](https://semaphoreci.com/api/v1/ir/ignite-ir-boilerplate-andross/branches/master/badge.svg)](https://semaphoreci.com/ir/ignite-ir-boilerplate-andross)
 
 
-
-## The latest and greatest boilerplate for Infinite Red opinions
-
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
+## The tried and true boilerplate for [Infinite Red](https://infinite.red) opinions
 
 Currently includes:
 
-* React Native 0.52.2 (but you can change this if you want to experiment)
+* React Native 0.55.1 (but you can change this if you want to experiment)
 * React Navigation
 * Redux
 * Redux Sagas
 * And more!
+
 
 ## Quick Start
 
@@ -144,15 +144,15 @@ Helpers for transforming data between API and your application and vice versa. A
 
 ### Tests
 
-This folder (located as a sibling to `App`) contains sample Jest snapshot and unit tests for your application.
-
-If you would like to have the `ignite generate` command include the generation of tests when avaiable, add
+This folder (located as a sibling to `App`) contains sample Jest snapshot and unit tests for your applica
+If you would like to have the `ignite generate` command include the generation of tests when available, add 
 `"test": "jest"` or `"test": "ava"` to `./ignite/ignite.json`, depending on the test runner you are using.
 
 **Previous Boilerplates**
 
 * [2016 aka Ignite 1.0](https://github.com/infinitered/ignite-ir-boilerplate-2016)
 
+
 ## Premium Support
 
-[Ignite CLI](https://infinite.red/ignite) and [Ignite IR Boilerplate](https://github.com/infinitered/ignite-ir-boilerplate), as open source projects, are free to use and always will be. [Infinite Red](https://infinite.red/) offers premium Ignite CLI support and general mobile app design/development services. Email us at [hello@infinite.red](mailto:hello@infinite.red) to get in touch with us for more details.
+[Ignite CLI](https://infinite.red/ignite) and [Ignite IR Boilerplate](https://github.com/infinitered/ignite-ir-boilerplate-andross), as open source projects, are free to use and always will be. [Infinite Red](https://infinite.red/) offers premium Ignite CLI support and general mobile app design/development services. Email us at [hello@infinite.red](mailto:hello@infinite.red) to get in touch with us for more details.
