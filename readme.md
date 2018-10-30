@@ -145,6 +145,7 @@ Helpers for transforming data between API and your application and vice versa. A
 ### Tests
 
 This folder (located as a sibling to `App`) contains sample Jest snapshot and unit tests for your application.
+
 If you would like to have the `ignite generate` command include the generation of tests when available, add 
 `"test": "jest"` or `"test": "ava"` to `./ignite/ignite.json`, depending on the test runner you are using.
 
