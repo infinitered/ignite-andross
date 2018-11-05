@@ -1,7 +1,7 @@
-diff --git a/before.pbxproj b/after.pbxproj
+diff --git a/project.pbxproj b/project.pbxproj
 index efb2609..91cef26 100644
---- a/before.pbxproj
-+++ b/after.pbxproj
+--- a/project.pbxproj
++++ b/project.pbxproj
 @@ -9,7 +9,7 @@
  /* Begin PBXBuildFile section */
  		1338BBE01B04ACC80064A9C9 /* RCTSRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1338BBDD1B04ACC80064A9C9 /* RCTSRWebSocket.m */; };

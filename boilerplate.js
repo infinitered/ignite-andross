@@ -51,7 +51,7 @@ async function install (context) {
   })
   if (rnInstall.exitCode > 0) process.exit(rnInstall.exitCode)
 
-  system.run(`git apply --include=${process.cwd()}/node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj/project.pbxproj ${__dirname}/lib/project.pbxproj.patch`)
+  system.run(`cd node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj && git apply ../../../../../../ignite-ir-boilerplate-andross/lib/project-pbxproj.patch`)
 
   // remove the __tests__ directory and App.js that come with React Native
   filesystem.remove('__tests__')
