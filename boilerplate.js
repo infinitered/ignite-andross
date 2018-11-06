@@ -51,8 +51,11 @@ async function install (context) {
   })
   if (rnInstall.exitCode > 0) process.exit(rnInstall.exitCode)
 
+  spinner.text = "Applying patch to RCTWebSocket"
+  spinner.start()
   system.run(`cd ./node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj && git apply ../../../../../../node_modules/ignite-ir-boilerplate-andross/lib/project-pbxproj.patch`)
-  
+  spinner.succeed()
+
   // remove the __tests__ directory and App.js that come with React Native
   filesystem.remove('__tests__')
   filesystem.remove('App.js')
