@@ -51,7 +51,7 @@ async function install (context) {
   })
   if (rnInstall.exitCode > 0) process.exit(rnInstall.exitCode)
 
-  spinner.text = "Applying patch to RCTWebSocket"
+  spinner.text = 'Applying patch to RCTWebSocket'
   spinner.start()
   system.run(`cd ./node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj && git apply ../../../../../../node_modules/ignite-ir-boilerplate-andross/lib/project-pbxproj.patch`)
   spinner.succeed()
