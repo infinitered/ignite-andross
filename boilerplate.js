@@ -175,11 +175,12 @@ async function install (context) {
 
     // now run install of Ignite Plugins
     if (answers['dev-screens'] === 'Yes') {
-      await system.spawn(`ignite add dev-screens@"~>2.2.0" ${debugFlag}`, {
+      await system.spawn(`ignite add dev-screens@"~>2.3.0" ${debugFlag}`, {
         stdio: 'inherit'
       })
-    }
+      await ignite.addModule("react-navigation", { version: "2.18.2" })
 
+    }
     if (answers['vector-icons'] === 'react-native-vector-icons') {
       await system.spawn(`ignite add vector-icons@"~>1.0.0" ${debugFlag}`, {
         stdio: 'inherit'
@@ -197,7 +198,7 @@ async function install (context) {
     }
 
     if (answers['redux-persist'] === 'Yes') {
-      await system.spawn(`ignite add redux-persist@"~>1.0.1" ${debugFlag}`, {
+      await system.spawn(`ignite add redux-persist@"~>5.10.0" ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
