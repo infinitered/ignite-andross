@@ -178,8 +178,7 @@ async function install (context) {
       await system.spawn(`ignite add dev-screens@"~>2.3.0" ${debugFlag}`, {
         stdio: 'inherit'
       })
-      await ignite.addModule("react-navigation", { version: "2.18.2" })
-
+      await ignite.addModule('react-navigation', { version: '2.18.2' })
     }
     if (answers['vector-icons'] === 'react-native-vector-icons') {
       await system.spawn(`ignite add vector-icons@"~>1.0.0" ${debugFlag}`, {
