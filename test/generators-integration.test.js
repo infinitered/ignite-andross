@@ -12,7 +12,7 @@ describe('without a linter', () => {
   beforeAll(async () => {
     // creates a new temp directory
     await process.chdir(await tempy.directory())
-    const exca = await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--no-lint', '--npm', '--boilerplate', BOILERPLATE])
+    await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--no-lint', '--npm', '--boilerplate', BOILERPLATE])
     process.chdir(APP)
   })
 
