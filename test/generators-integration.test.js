@@ -5,15 +5,14 @@ const tempy = require('tempy')
 const IGNITE = 'ignite'
 const APP = 'IntegrationTest'
 const BOILERPLATE = `${__dirname}/..`
-
 // calling the ignite cli takes a while
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 
 describe('without a linter', () => {
   beforeAll(async () => {
     // creates a new temp directory
-    process.chdir(tempy.directory())
-    await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--no-lint', '--boilerplate', BOILERPLATE])
+    await process.chdir(await tempy.directory())
+    const exca = await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--no-lint', '--npm', '--boilerplate', BOILERPLATE])
     process.chdir(APP)
   })
 
@@ -26,7 +25,7 @@ describe('generators', () => {
   beforeAll(async () => {
     // creates a new temp directory
     process.chdir(tempy.directory())
-    await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--boilerplate', BOILERPLATE])
+    await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--npm', '--boilerplate', BOILERPLATE])
     process.chdir(APP)
   })
 
