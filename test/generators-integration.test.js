@@ -11,7 +11,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 describe('without a linter', () => {
   beforeAll(async () => {
     // creates a new temp directory
-    await process.chdir(await tempy.directory())
+    process.chdir(tempy.directory())
     await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--no-lint', '--npm', '--boilerplate', BOILERPLATE])
     process.chdir(APP)
   })
