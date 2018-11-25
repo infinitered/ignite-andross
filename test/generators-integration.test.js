@@ -12,8 +12,7 @@ describe('without a linter', () => {
   beforeAll(async () => {
     // creates a new temp directory
     process.chdir(tempy.directory())
-    const prj = await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--no-lint', '--debug', '--boilerplate', BOILERPLATE])
-    console.log(prj)
+    await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--no-lint', '--boilerplate', BOILERPLATE])
     process.chdir(APP)
   })
 
@@ -26,8 +25,7 @@ describe('generators', () => {
   beforeAll(async () => {
     // creates a new temp directory
     process.chdir(tempy.directory())
-    const prj = await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--debug', '--boilerplate', BOILERPLATE])
-    console.log(prj)
+    await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--boilerplate', BOILERPLATE])
     process.chdir(APP)
   })
 

@@ -10,7 +10,7 @@
 Currently includes:
 
 * React Native 0.57.5 (but you can change this if you want to experiment)
-* React Navigation
+* React Navigation 3.0.0
 * Redux
 * Redux Sagas
 * And more!

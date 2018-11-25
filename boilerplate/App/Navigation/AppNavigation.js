@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
 import LaunchScreen from '../Containers/LaunchScreen'
 
 import styles from './Styles/NavigationStyles'
@@ -15,4 +15,4 @@ const PrimaryNav = createStackNavigator({
   }
 })
 
-export default PrimaryNav
+export default createAppContainer(PrimaryNav)
