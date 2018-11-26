@@ -23,13 +23,9 @@ jobs:
             - v1-dependencies-
       - run:
           name: Install dependencies
-          command: yarn install
-      - run:
-          name: Install React Native CLI
-          command: yarn global add react-native-cli
-      - run:
-          name: Install Ignite
-          command: yarn global add ignite-cli
+          command: |
+            yarn install
+            yarn global add ignite-cli react-native-cli
       - save_cache:
           name: Save node modules
           paths:
