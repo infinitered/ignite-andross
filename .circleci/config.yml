@@ -25,6 +25,9 @@ jobs:
           name: Install dependencies
           command: yarn install
       - run:
+          name: Install React Native CLI
+          command: yarn add react-native-cli
+      - run:
           name: Install Ignite
           command: yarn add ignite-cli
       - save_cache:
