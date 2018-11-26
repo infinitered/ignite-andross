@@ -25,7 +25,7 @@ jobs:
           name: Install dependencies
           command: |
             yarn install
-            sudo npm i ignite-cli react-native-cli
+            sudo npm i -g ignite-cli react-native-cli
       - save_cache:
           name: Save node modules
           paths:
