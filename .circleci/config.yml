@@ -26,7 +26,7 @@ jobs:
           command: yarn install
       - run:
           name: Install Ignite
-          command: yarn global add ignite-cli
+          command: yarn add ignite-cli
       - save_cache:
           name: Save node modules
           paths:
