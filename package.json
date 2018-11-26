@@ -28,7 +28,7 @@
     "watch": "jest --runInBand --watch",
     "coverage": "jest --runInBand --coverage",
     "shipit": "np",
-    "ci:test": "jest",
+    "ci:test": "jest"
   },
   "standard": {
     "parser": "babel-eslint",
