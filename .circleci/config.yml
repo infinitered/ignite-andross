@@ -25,7 +25,6 @@ jobs:
           name: Install dependencies
           command: |
             yarn install
-            sudo npm i -g ignite-cli react-native-cli
       - save_cache:
           name: Save node modules
           paths:
@@ -43,6 +42,10 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+      - run:
+          name: Install React Native CLI and Ignite CLI
+          command: |
+            sudo npm i -g ignite-cli react-native-cli
       - run:
           name: Run tests
           command: yarn ci:test # this command will be added to/found in your package.json scripts
