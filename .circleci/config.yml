@@ -50,6 +50,7 @@ jobs:
           name: Run tests
           command: yarn ci:test # this command will be added to/found in your package.json scripts
 
+<<<<<<< HEAD
 publish:
   <<: *defaults
   steps:
@@ -65,7 +66,6 @@ publish:
     - run:
         name: Publish to NPM
         command: yarn ci:publish # this will be added to your package.json scripts
-
 workflows:
   version: 2
   test_and_release:
