@@ -50,7 +50,6 @@ jobs:
           name: Run tests
           command: yarn ci:test # this command will be added to/found in your package.json scripts
 
-<<<<<<< HEAD
 publish:
   <<: *defaults
   steps:
