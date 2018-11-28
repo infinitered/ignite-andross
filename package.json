@@ -27,7 +27,6 @@
     "test": "jest",
     "watch": "jest --runInBand --watch",
     "coverage": "jest --runInBand --coverage",
-    "shipit": "np",
     "ci:test": "yarn test",
     "ci:publish": "yarn semantic-release",
     "semantic-release": "semantic-release"
