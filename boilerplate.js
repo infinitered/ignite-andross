@@ -182,13 +182,13 @@ async function install (context) {
     await ignite.addModule('react-navigation', { version: '3.0.0' })
     await ignite.addModule('react-native-gesture-handler', { version: '1.0.9', link: true })
     console.log(`${process.cwd()}/android/app/src/main/java/com/${name}/MainActivity.java`)
-    // ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name}/MainActivity.java`, {
-    //   after: 'import com.facebook.react.ReactActivity;',
-    //   insert: `
-    //   import com.facebook.react.ReactActivityDelegate;
-    //   import com.facebook.react.ReactRootView;
-    //   import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;`
-    // })
+    ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
+      after: 'import com.facebook.react.ReactActivity;',
+      insert: `
+      import com.facebook.react.ReactActivityDelegate;
+      import com.facebook.react.ReactRootView;
+      import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;`
+    })
     //
     // ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name}/MainActivity.java`, {
     //   after: `public class MainActivity extends ReactActivity {`,
