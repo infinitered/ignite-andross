@@ -68,7 +68,8 @@
     "sinon": "^2.3.1",
     "socks": "^2.1.6",
     "standard": "^10.0.2",
-    "tempy": "^0.1.0"
+    "tempy": "^0.1.0",
+    "socks": "^2.1.6"
   },
   "dependencies": {
     "ramda": "^0.23.0"

@@ -5,7 +5,6 @@ const tempy = require('tempy')
 const IGNITE = 'ignite'
 const APP = 'IntegrationTest'
 const BOILERPLATE = `${__dirname}/..`
-
 // calling the ignite cli takes a while
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
 

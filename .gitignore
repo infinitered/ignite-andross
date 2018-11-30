@@ -16,3 +16,6 @@ node_modules
 testgrounds
 IntegrationTest
 integration_test
+
+# WebStorm
+.idea
