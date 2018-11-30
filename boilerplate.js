@@ -182,26 +182,26 @@ async function install (context) {
     await ignite.addModule('react-navigation', { version: '3.0.0' })
     await ignite.addModule('react-native-gesture-handler', { version: '1.0.9', link: true })
 
-    ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name}/MainActivity.java`, {
-      after: 'import com.facebook.react.ReactActivity;',
-      insert: `
-      import com.facebook.react.ReactActivityDelegate;
-      import com.facebook.react.ReactRootView;
-      import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;`
-    })
-
-    ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name}/MainActivity.java`, {
-      after: `public class MainActivity extends ReactActivity {`,
-      insert: '\n  @Override\n' +
-      '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
-      '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
-      '      @Override\n' +
-      '      protected ReactRootView createRootView() {\n' +
-      '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
-      '      }\n' +
-      '    };\n' +
-      '  }'
-    })
+    // ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name}/MainActivity.java`, {
+    //   after: 'import com.facebook.react.ReactActivity;',
+    //   insert: `
+    //   import com.facebook.react.ReactActivityDelegate;
+    //   import com.facebook.react.ReactRootView;
+    //   import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;`
+    // })
+    //
+    // ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name}/MainActivity.java`, {
+    //   after: `public class MainActivity extends ReactActivity {`,
+    //   insert: '\n  @Override\n' +
+    //   '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
+    //   '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
+    //   '      @Override\n' +
+    //   '      protected ReactRootView createRootView() {\n' +
+    //   '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
+    //   '      }\n' +
+    //   '    };\n' +
+    //   '  }'
+    // })
     if (answers['vector-icons'] === 'react-native-vector-icons') {
       await system.spawn(`ignite add vector-icons@"~>1.0.0" ${debugFlag}`, {
         stdio: 'inherit'
