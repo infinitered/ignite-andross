@@ -189,19 +189,19 @@ async function install (context) {
       import com.facebook.react.ReactRootView;
       import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;`
     })
-    //
-    // ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name}/MainActivity.java`, {
-    //   after: `public class MainActivity extends ReactActivity {`,
-    //   insert: '\n  @Override\n' +
-    //   '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
-    //   '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
-    //   '      @Override\n' +
-    //   '      protected ReactRootView createRootView() {\n' +
-    //   '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
-    //   '      }\n' +
-    //   '    };\n' +
-    //   '  }'
-    // })
+
+    ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
+      after: `public class MainActivity extends ReactActivity {`,
+      insert: '\n  @Override\n' +
+      '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
+      '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
+      '      @Override\n' +
+      '      protected ReactRootView createRootView() {\n' +
+      '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
+      '      }\n' +
+      '    };\n' +
+      '  }'
+    })
     if (answers['vector-icons'] === 'react-native-vector-icons') {
       await system.spawn(`ignite add vector-icons@"~>1.0.0" ${debugFlag}`, {
         stdio: 'inherit'
