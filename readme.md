@@ -9,8 +9,8 @@
 
 Currently includes:
 
-* React Native 0.55.1 (but you can change this if you want to experiment)
-* React Navigation
+* React Native 0.57.7 (but you can change this if you want to experiment)
+* React Navigation 3.0.0
 * Redux
 * Redux Sagas
 * And more!

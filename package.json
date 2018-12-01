@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": "infinitered/ignite-ir-boilerplate-andross",
   "homepage": "https://github.com/infinitered/ignite-ir-boilerplate-andross",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "files": [
     "boilerplate",
     "commands",
@@ -27,7 +27,9 @@
     "test": "jest",
     "watch": "jest --runInBand --watch",
     "coverage": "jest --runInBand --coverage",
-    "shipit": "np"
+    "ci:test": "yarn test",
+    "ci:publish": "yarn semantic-release",
+    "semantic-release": "semantic-release"
   },
   "standard": {
     "parser": "babel-eslint",
@@ -41,12 +43,30 @@
       "describe"
     ]
   },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": "package.json",
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
   "devDependencies": {
+    "@semantic-release/git": "^7.0.5",
     "babel-eslint": "^7.1.1",
     "fs-jetpack": "^1.0.0",
     "jest": "^20.0.4",
     "np": "^2.15.0",
+    "semantic-release": "^15.12.2",
     "sinon": "^2.3.1",
+    "socks": "^2.1.6",
     "standard": "^10.0.2",
     "tempy": "^0.1.0"
   },

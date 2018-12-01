@@ -1,10 +1,10 @@
-import { StackNavigator } from 'react-navigation'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
 import LaunchScreen from '../Containers/LaunchScreen'
 
 import styles from './Styles/NavigationStyles'
 
 // Manifest of possible screens
-const PrimaryNav = StackNavigator({
+const PrimaryNav = createStackNavigator({
   LaunchScreen: { screen: LaunchScreen }
 }, {
   // Default config for all screens
@@ -15,4 +15,4 @@ const PrimaryNav = StackNavigator({
   }
 })
 
-export default PrimaryNav
+export default createAppContainer(PrimaryNav)
