@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": "infinitered/ignite-ir-boilerplate-andross",
   "homepage": "https://github.com/infinitered/ignite-ir-boilerplate-andross",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "files": [
     "boilerplate",
     "commands",
@@ -68,8 +68,7 @@
     "sinon": "^2.3.1",
     "socks": "^2.1.6",
     "standard": "^10.0.2",
-    "tempy": "^0.1.0",
-    "socks": "^2.1.6"
+    "tempy": "^0.1.0"
   },
   "dependencies": {
     "ramda": "^0.23.0"
