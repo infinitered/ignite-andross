@@ -24,8 +24,12 @@ module.exports = async function (context) {
       target: `App/Containers/${name}.js`
     },
     {
+      template: 'container-component.ejs',
+      target: `App/Components/${name}.js`
+    },
+    {
       template: 'container-style.ejs',
-      target: `App/Containers/Styles/${name}Style.js`
+      target: `App/Components/Styles/${name}Style.js`
     }
   ]
 
