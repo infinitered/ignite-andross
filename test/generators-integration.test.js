@@ -67,40 +67,45 @@ describe('generators', () => {
 
   test('generate listview of type row works', async () => {
     await execa(IGNITE, ['g', 'list', 'TestRow', '--type=Row', '--codeType=listview', '--dataType=Single'], { preferLocal: false })
-    expect(jetpack.exists('App/Containers/TestRow.js')).toBe('file')
-    expect(jetpack.exists('App/Containers/Styles/TestRowStyle.js')).toBe('file')
+    expect(jetpack.exists('App/Container/TestRow.js')).toBe('file')
+    expect(jetpack.exists('App/Components/TestRow.js')).toBe('file')
+    expect(jetpack.exists('App/Components/Styles/TestRowStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
     expect(lint.stderr).toBe('')
   })
 
   test('generate flatlist of type row works', async () => {
     await execa(IGNITE, ['g', 'list', 'TestFlatRow', '--type=Row', '--codeType=flatlist', '--dataType=Single'], { preferLocal: false })
-    expect(jetpack.exists('App/Containers/TestFlatRow.js')).toBe('file')
-    expect(jetpack.exists('App/Containers/Styles/TestFlatRowStyle.js')).toBe('file')
+    expect(jetpack.exists('App/Container/TestFlatRow.js')).toBe('file')
+    expect(jetpack.exists('App/Components/TestFlatRow.js')).toBe('file')
+    expect(jetpack.exists('App/Components/Styles/TestFlatRowStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
     expect(lint.stderr).toBe('')
   })
 
   test('generate listview of sections works', async () => {
     await execa(IGNITE, ['g', 'list', 'TestSection', '--type=Row', '--codeType=listview', '--dataType=Sectioned'], { preferLocal: false })
-    expect(jetpack.exists('App/Containers/TestSection.js')).toBe('file')
-    expect(jetpack.exists('App/Containers/Styles/TestSectionStyle.js')).toBe('file')
+    expect(jetpack.exists('App/Container/TestSection.js')).toBe('file')
+    expect(jetpack.exists('App/Components/TestSection.js')).toBe('file')
+    expect(jetpack.exists('App/Components/Styles/TestSectionStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
     expect(lint.stderr).toBe('')
   })
 
   test('generate flatlist of sections works', async () => {
     await execa(IGNITE, ['g', 'list', 'TestFlatSection', '--type=Row', '--codeType=flatlist', '--dataType=Sectioned'], { preferLocal: false })
-    expect(jetpack.exists('App/Containers/TestFlatSection.js')).toBe('file')
-    expect(jetpack.exists('App/Containers/Styles/TestFlatSectionStyle.js')).toBe('file')
+    expect(jetpack.exists('App/Container/TestFlatSection.js')).toBe('file')
+    expect(jetpack.exists('App/Components/TestFlatSection.js')).toBe('file')
+    expect(jetpack.exists('App/Components/Styles/TestFlatSectionStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
     expect(lint.stderr).toBe('')
   })
 
   test('generate listview of type grid works', async () => {
     await execa(IGNITE, ['g', 'list', 'TestGrid', '--type=Grid', '--codeType=listview', '--dataType=Single'], { preferLocal: false })
-    expect(jetpack.exists('App/Containers/TestGrid.js')).toBe('file')
-    expect(jetpack.exists('App/Containers/Styles/TestGridStyle.js')).toBe('file')
+    expect(jetpack.exists('App/Container/TestGrid.js')).toBe('file')
+    expect(jetpack.exists('App/Components/TestGrid.js')).toBe('file')
+    expect(jetpack.exists('App/Components/Styles/TestGridStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
     expect(lint.stderr).toBe('')
   })
@@ -114,8 +119,9 @@ describe('generators', () => {
 
   test('generate container works', async () => {
     await execa(IGNITE, ['g', 'container', 'Container'], { preferLocal: false })
-    expect(jetpack.exists('App/Containers/Container.js')).toBe('file')
-    expect(jetpack.exists('App/Containers/Styles/ContainerStyle.js')).toBe('file')
+    expect(jetpack.exists('App/Container/Container.js')).toBe('file')
+    expect(jetpack.exists('App/Components/Container.js')).toBe('file')
+    expect(jetpack.exists('App/Components/Styles/ContainerStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
     expect(lint.stderr).toBe('')
   })
