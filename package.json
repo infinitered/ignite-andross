@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": "infinitered/ignite-andross",
   "homepage": "https://github.com/infinitered/ignite-andross",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "files": [
     "boilerplate",
     "commands",
