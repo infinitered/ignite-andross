@@ -111,7 +111,7 @@ async function install (context) {
    * Append to files
    */
   // https://github.com/facebook/react-native/issues/12724
-  filesystem.appendAsync('.gitattributes', '*.bat text eol=crlf')
+  await filesystem.appendAsync('.gitattributes', '*.bat text eol=crlf')
   filesystem.append('.gitignore', '\n# Misc\n#')
   filesystem.append('.gitignore', '\n.env\n')
 
@@ -242,7 +242,7 @@ async function install (context) {
 
     // TODO: Make husky hooks optional
     const huskyCmd = '' // `&& node node_modules/husky/bin/install .`
-    system.run(`git init . && git add . && git commit -m "Initial commit." ${huskyCmd}`)
+    await system.run(`git init . && git add . && git commit -m "Initial commit." ${huskyCmd}`)
 
     spinner.succeed(`configured git`)
   }
