@@ -1,21 +1,20 @@
 <p align="center"><img src="http://ir_public.s3.amazonaws.com/projects/ignite/ignite-andross-launch-screen.png" alt="logo" width="414px"></p>
 
-# Ignite IR Boilerplate ("Andross")
+# Ignite "Andross" Boilerplate
 
 NOTE: This repo has been renamed from ignite-ir-boilerplate-andross to ignite-andross. Although web traffic and git operations for the previous name will be redirected, we recommend you update any links and git urls for this repo.
 
 [![CircleCI](https://circleci.com/gh/infinitered/ignite-andross.svg?style=svg)](https://circleci.com/gh/infinitered/ignite-andross)
 
-## The tried and true boilerplate for [Infinite Red](https://infinite.red) opinions
+## The original tried and true boilerplate for [Infinite Red](https://infinite.red)'s React Native apps
 
 Currently includes:
 
-* React Native 0.57.7 (but you can change this if you want to experiment)
+* React Native 0.57.7
 * React Navigation 3.0.0
 * Redux
 * Redux Sagas
 * And more!
-
 
 ## Quick Start
 
@@ -31,10 +30,10 @@ By default we'll ask you to choose which boilerplate you'd like. If you just wan
 ignite new MyLatestCreation --boilerplate andross
 ```
 
-You can also change the React Native version, just keep in mind, we may not have tested this just yet.
+You can also change the React Native version; just keep in mind, we may not have tested this just yet.
 
 ```sh
-ignite new MyLatestCreation --react-native-version 0.46.0-rc.2
+ignite new MyLatestCreation --react-native-version 0.99.0-rc.2
 ```
 
 By default we'll ask you some questions during install as to which features you'd like.  If you just want them all, you can skip the questions:
@@ -125,7 +124,10 @@ Here again we have generators to help you out. You just have to use one of the f
 * `ignite g redux Amazing` - Will generate and link the redux for `Amazing`.
 * `ignite g saga Amazing` - The same as above, but for the Sagas
 
-_TODO: explain more about Redux & Redux Sagas here_
+You can read more about Redux and Redux Sagas in these blog posts:
+
+* [Using redux-saga To Simplify Your Growing React Native Codebase](https://shift.infinite.red/using-redux-saga-to-simplify-your-growing-react-native-codebase-2b8036f650de)
+* [A Tour of React Native — Part 2: Redux & Friends](https://shift.infinite.red/a-tour-of-react-native-part-2-redux-friends-4fed022aaa1e)
 
 ### Services
 
