@@ -174,11 +174,6 @@ async function install (context) {
     await system.spawn(`ignite add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
 
     // now run install of Ignite Plugins
-    if (answers['dev-screens'] === 'Yes') {
-      await system.spawn(`ignite add dev-screens@"~>2.3.0" ${debugFlag}`, {
-        stdio: 'inherit'
-      })
-    }
     await ignite.addModule('react-navigation', { version: '3.0.0' })
     await ignite.addModule('react-native-gesture-handler', { version: '1.0.9', link: true })
 
@@ -214,6 +209,14 @@ async function install (context) {
 
     if (answers['animatable'] === 'react-native-animatable') {
       await system.spawn(`ignite add animatable@"~>1.0.0" ${debugFlag}`, {
+        stdio: 'inherit'
+      })
+    }
+
+    // dev-screens be installed after vector-icons and animatable so that it can
+    // conditionally patch its PluginExamplesScreen
+    if (answers['dev-screens'] === 'Yes') {
+      await system.spawn(`ignite add dev-screens@"~>2.3.0" ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
