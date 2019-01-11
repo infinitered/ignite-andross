@@ -45,9 +45,11 @@ async function install (context) {
     .succeed()
 
   // attempt to install React Native or die trying
+  const useNpm = ignite.useYarn ? false : true
   const rnInstall = await reactNative.install({
     name,
-    version: getReactNativeVersion(context)
+    version: getReactNativeVersion(context),
+    useNpm,
   })
   if (rnInstall.exitCode > 0) process.exit(rnInstall.exitCode)
 
