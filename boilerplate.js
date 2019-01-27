@@ -10,7 +10,7 @@ const { getReactNativeVersion } = require('./lib/react-native-version')
  * @param {*} context - The gluegun context.
  * @returns {boolean}
  */
-const isAndroidInstalled = function (context) {
+const isAndroidInstalled = function(context) {
   const androidHome = process.env['ANDROID_HOME']
   const hasAndroidEnv = !context.strings.isBlank(androidHome)
   const hasAndroid = hasAndroidEnv && context.filesystem.exists(`${androidHome}/tools`) === 'dir'
@@ -23,23 +23,14 @@ const isAndroidInstalled = function (context) {
  *
  * @param {any} context - The gluegun context.
  */
-async function install (context) {
-  const {
-    filesystem,
-    parameters,
-    ignite,
-    reactNative,
-    print,
-    system,
-    prompt,
-    template
-  } = context
+async function install(context) {
+  const { filesystem, parameters, ignite, reactNative, print, system, prompt, template } = context
   const { colors } = print
   const { red, yellow, bold, gray, blue } = colors
 
-  const perfStart = (new Date()).getTime()
+  const perfStart = new Date().getTime()
 
-  const name = parameters.third
+  const name = parameters.first
   const spinner = print
     .spin(`using the ${red('Infinite Red')} boilerplate v2 (code name 'Andross')`)
     .succeed()
@@ -118,7 +109,7 @@ async function install (context) {
   /**
    * Merge the package.json from our template into the one provided from react-native init.
    */
-  async function mergePackageJsons () {
+  async function mergePackageJsons() {
     // transform our package.json in case we need to replace variables
     const rawJson = await template.generate({
       directory: `${ignite.ignitePluginPath()}/boilerplate`,
@@ -132,19 +123,13 @@ async function install (context) {
 
     // deep merge, lol
     const newPackage = pipe(
-      assoc(
-        'dependencies',
-        merge(currentPackage.dependencies, newPackageJson.dependencies)
-      ),
+      assoc('dependencies', merge(currentPackage.dependencies, newPackageJson.dependencies)),
       assoc(
         'devDependencies',
         merge(currentPackage.devDependencies, newPackageJson.devDependencies)
       ),
       assoc('scripts', merge(currentPackage.scripts, newPackageJson.scripts)),
-      merge(
-        __,
-        omit(['dependencies', 'devDependencies', 'scripts'], newPackageJson)
-      )
+      merge(__, omit(['dependencies', 'devDependencies', 'scripts'], newPackageJson))
     )(currentPackage)
 
     // write this out
@@ -177,26 +162,33 @@ async function install (context) {
     await ignite.addModule('react-navigation', { version: '3.0.0' })
     await ignite.addModule('react-native-gesture-handler', { version: '1.0.9', link: true })
 
-    ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
-      after: 'import com.facebook.react.ReactActivity;',
-      insert: `
+    ignite.patchInFile(
+      `${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`,
+      {
+        after: 'import com.facebook.react.ReactActivity;',
+        insert: `
       import com.facebook.react.ReactActivityDelegate;
       import com.facebook.react.ReactRootView;
       import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;`
-    })
+      }
+    )
 
-    ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
-      after: `public class MainActivity extends ReactActivity {`,
-      insert: '\n  @Override\n' +
-      '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
-      '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
-      '      @Override\n' +
-      '      protected ReactRootView createRootView() {\n' +
-      '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
-      '      }\n' +
-      '    };\n' +
-      '  }'
-    })
+    ignite.patchInFile(
+      `${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`,
+      {
+        after: `public class MainActivity extends ReactActivity {`,
+        insert:
+          '\n  @Override\n' +
+          '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
+          '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
+          '      @Override\n' +
+          '      protected ReactRootView createRootView() {\n' +
+          '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
+          '      }\n' +
+          '    };\n' +
+          '  }'
+      }
+    )
     if (answers['vector-icons'] === 'react-native-vector-icons') {
       await system.spawn(`ignite add vector-icons@"~>1.0.0" ${debugFlag}`, {
         stdio: 'inherit'
@@ -250,11 +242,14 @@ async function install (context) {
     spinner.succeed(`configured git`)
   }
 
-  const perfDuration = parseInt(((new Date()).getTime() - perfStart) / 10) / 100
+  const perfDuration = parseInt((new Date().getTime() - perfStart) / 10) / 100
   spinner.succeed(`ignited ${yellow(name)} in ${perfDuration}s`)
 
-  const androidInfo = isAndroidInstalled(context) ? ''
-    : `\n\nTo run in Android, make sure you've followed the latest react-native setup instructions at https://facebook.github.io/react-native/docs/getting-started.html before using ignite.\nYou won't be able to run ${bold('react-native run-android')} successfully until you have.`
+  const androidInfo = isAndroidInstalled(context)
+    ? ''
+    : `\n\nTo run in Android, make sure you've followed the latest react-native setup instructions at https://facebook.github.io/react-native/docs/getting-started.html before using ignite.\nYou won't be able to run ${bold(
+        'react-native run-android'
+      )} successfully until you have.`
 
   const successMessage = `
     ${red('Ignite CLI')} ignited ${yellow(name)} in ${gray(`${perfDuration}s`)}
@@ -266,7 +261,9 @@ async function install (context) {
       react-native run-android${androidInfo}
       ignite --help
 
-    ${gray('Read the walkthrough at https://github.com/infinitered/ignite-andross/blob/master/readme.md#boilerplate-walkthrough')}
+    ${gray(
+      'Read the walkthrough at https://github.com/infinitered/ignite-andross/blob/master/readme.md#boilerplate-walkthrough'
+    )}
 
     ${blue('Need additional help? Join our Slack community at http://community.infinite.red.')}
 
