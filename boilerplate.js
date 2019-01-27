@@ -190,17 +190,17 @@ async function install(context) {
       }
     )
     if (answers['vector-icons'] === 'react-native-vector-icons') {
-      await system.spawn(`ignite add vector-icons@"~>1.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add vector-icons@1.1.1 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (answers['i18n'] === 'react-native-i18n') {
-      await system.spawn(`ignite add i18n@"~>1.0.0" ${debugFlag}`, { stdio: 'inherit' })
+      await system.spawn(`ignite add i18n@1.2.0 ${debugFlag}`, { stdio: 'inherit' })
     }
 
     if (answers['animatable'] === 'react-native-animatable') {
-      await system.spawn(`ignite add animatable@"~>1.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add animatable@1.0.2 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
@@ -208,19 +208,19 @@ async function install(context) {
     // dev-screens be installed after vector-icons and animatable so that it can
     // conditionally patch its PluginExamplesScreen
     if (answers['dev-screens'] === 'Yes') {
-      await system.spawn(`ignite add dev-screens@"~>2.3.0" ${debugFlag}`, {
+      await system.spawn(`ignite add dev-screens@"2.4.3" ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (answers['redux-persist'] === 'Yes') {
-      await system.spawn(`ignite add redux-persist@"~>5.10.0" ${debugFlag}`, {
+      await system.spawn(`ignite add redux-persist@1.1.2 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (parameters.options.lint !== 'false') {
-      await system.spawn(`ignite add standard@"~>1.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add standard@1.0.0 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
