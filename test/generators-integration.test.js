@@ -27,6 +27,7 @@ describe('generators', () => {
     process.chdir(tempy.directory())
     await execa(IGNITE, ['new', APP, '--min', '--skip-git', '--boilerplate', BOILERPLATE])
     process.chdir(APP)
+    await execa('npm', ['run', 'fixcode'])
   })
 
   test('generates a component', async () => {
