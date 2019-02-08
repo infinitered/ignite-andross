@@ -72,6 +72,6 @@
     "tempy": "^0.1.0"
   },
   "dependencies": {
-    "ramda": "^0.23.0"
+    "ramda": "^0.26.1"
   }
 }
