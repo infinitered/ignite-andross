@@ -4,9 +4,14 @@ const tempy = require('tempy')
 
 const IGNITE = 'ignite'
 const APP = 'IntegrationTest'
-const BOILERPLATE = `${__dirname}/..`
+const BOILERPLATE = jetpack.path(__dirname, '..')
+
 // calling the ignite cli takes a while
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000
+
+const exopts = {
+  preferLocal: false
+}
 
 describe('without a linter', () => {
   beforeAll(async () => {
@@ -57,7 +62,7 @@ describe('generators', () => {
     expect(lint.stderr).toBe('')
   })
 
-  test('generates a component in a relative path', async() => {
+  test('generates a component in a relative path', async () => {
     await execa(IGNITE, ['g', 'component', 'My/SubFolder/Test'], { preferLocal: false })
     expect(jetpack.exists('App/Components/My/SubFolder/Test.js')).toBe('file')
     expect(jetpack.exists('App/Components/My/SubFolder/Styles/TestStyle.js')).toBe('file')
@@ -66,7 +71,7 @@ describe('generators', () => {
   })
 
   test('generate listview of type row works', async () => {
-    await execa(IGNITE, ['g', 'list', 'TestRow', '--type=Row', '--codeType=listview', '--dataType=Single'], { preferLocal: false })
+    await execa(IGNITE, ['g', 'list', 'TestRow', '--type=Row', '--codeType=listview', '--dataType=Single'], exopts)
     expect(jetpack.exists('App/Containers/TestRow.js')).toBe('file')
     expect(jetpack.exists('App/Containers/Styles/TestRowStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
@@ -74,7 +79,7 @@ describe('generators', () => {
   })
 
   test('generate flatlist of type row works', async () => {
-    await execa(IGNITE, ['g', 'list', 'TestFlatRow', '--type=Row', '--codeType=flatlist', '--dataType=Single'], { preferLocal: false })
+    await execa(IGNITE, ['g', 'list', 'TestFlatRow', '--type=Row', '--codeType=flatlist', '--dataType=Single'], exopts)
     expect(jetpack.exists('App/Containers/TestFlatRow.js')).toBe('file')
     expect(jetpack.exists('App/Containers/Styles/TestFlatRowStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
@@ -82,7 +87,11 @@ describe('generators', () => {
   })
 
   test('generate listview of sections works', async () => {
-    await execa(IGNITE, ['g', 'list', 'TestSection', '--type=Row', '--codeType=listview', '--dataType=Sectioned'], { preferLocal: false })
+    await execa(
+      IGNITE,
+      ['g', 'list', 'TestSection', '--type=Row', '--codeType=listview', '--dataType=Sectioned'],
+      exopts
+    )
     expect(jetpack.exists('App/Containers/TestSection.js')).toBe('file')
     expect(jetpack.exists('App/Containers/Styles/TestSectionStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
@@ -90,7 +99,11 @@ describe('generators', () => {
   })
 
   test('generate flatlist of sections works', async () => {
-    await execa(IGNITE, ['g', 'list', 'TestFlatSection', '--type=Row', '--codeType=flatlist', '--dataType=Sectioned'], { preferLocal: false })
+    await execa(
+      IGNITE,
+      ['g', 'list', 'TestFlatSection', '--type=Row', '--codeType=flatlist', '--dataType=Sectioned'],
+      exopts
+    )
     expect(jetpack.exists('App/Containers/TestFlatSection.js')).toBe('file')
     expect(jetpack.exists('App/Containers/Styles/TestFlatSectionStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])
@@ -98,7 +111,7 @@ describe('generators', () => {
   })
 
   test('generate listview of type grid works', async () => {
-    await execa(IGNITE, ['g', 'list', 'TestGrid', '--type=Grid', '--codeType=listview', '--dataType=Single'], { preferLocal: false })
+    await execa(IGNITE, ['g', 'list', 'TestGrid', '--type=Grid', '--codeType=listview', '--dataType=Single'], exopts)
     expect(jetpack.exists('App/Containers/TestGrid.js')).toBe('file')
     expect(jetpack.exists('App/Containers/Styles/TestGridStyle.js')).toBe('file')
     const lint = await execa('npm', ['run', 'lint'])

@@ -1,14 +1,14 @@
 module.exports = {
   description: ' Generates a action/creator/reducer set for Redux.',
-  run: async function(context) {
+  run: async function(toolbox) {
     // grab some features
-    const { parameters, ignite, strings, print } = context
+    const { parameters, ignite, strings, print } = toolbox
     const { isBlank, pascalCase } = strings
     const config = ignite.loadIgniteConfig()
 
     // validation
     if (isBlank(parameters.first)) {
-      print.info(`${context.runtime.brand} generate redux <name>\n`)
+      print.info(`${toolbox.runtime.brand} generate redux <name>\n`)
       print.info('A name is required.')
       return
     }
@@ -24,6 +24,6 @@ module.exports = {
       })
     }
 
-    await ignite.copyBatch(context, jobs, props)
+    await ignite.copyBatch(toolbox, jobs, props)
   }
 }

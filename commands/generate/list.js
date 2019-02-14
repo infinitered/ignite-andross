@@ -1,16 +1,16 @@
 module.exports = {
   alias: ['ls', 'listview'],
   description: 'Generates a screen with a ListView/Flatlist/SectionList + walkthrough.',
-  run: async function(context) {
-    const patterns = require('../lib/patterns')
+  run: async function(toolbox) {
+    const patterns = require('../../lib/patterns')
     // grab some features
-    const { print, parameters, strings, ignite, filesystem } = context
+    const { print, parameters, strings, ignite, filesystem } = toolbox
     const { pascalCase, isBlank } = strings
     const config = ignite.loadIgniteConfig()
 
     // validation
     if (isBlank(parameters.first)) {
-      print.info(`${context.runtime.brand} generate list <name>\n`)
+      print.info(`${toolbox.runtime.brand} generate list <name>\n`)
       print.info('A name is required.')
       return
     }
@@ -38,7 +38,7 @@ module.exports = {
     // only prompt if type is not defined
     if (!typeCode) {
       // as question 1
-      const codeAnswers = await context.prompt.ask({
+      const codeAnswers = await toolbox.prompt.ask({
         name: 'type',
         type: 'list',
         message: typeCodeMessage,
@@ -49,7 +49,7 @@ module.exports = {
 
     if (!type) {
       // ask question 2
-      const answers = await context.prompt.ask({
+      const answers = await toolbox.prompt.ask({
         name: 'type',
         type: 'list',
         message: typeMessage,
@@ -60,7 +60,7 @@ module.exports = {
 
     if (!dataType) {
       // ask question 3
-      const dataAnswers = await context.prompt.ask({
+      const dataAnswers = await toolbox.prompt.ask({
         name: 'type',
         type: 'list',
         message: typeDataMessage,
@@ -107,7 +107,7 @@ module.exports = {
       }
     ]
 
-    await ignite.copyBatch(context, jobs, props)
+    await ignite.copyBatch(toolbox, jobs, props)
 
     // if using `react-navigation` go the extra step
     // and insert the screen into the nav router

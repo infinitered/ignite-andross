@@ -1,16 +1,16 @@
-const patterns = require('../lib/patterns')
+const patterns = require('../../lib/patterns')
 
 module.exports = {
   description: 'Generates a redux smart component.',
-  run: async function(context) {
+  run: async function(toolbox) {
     // grab some features
-    const { parameters, strings, print, ignite, filesystem } = context
+    const { parameters, strings, print, ignite, filesystem } = toolbox
     const { pascalCase, isBlank } = strings
     const config = ignite.loadIgniteConfig()
 
     // validation
     if (isBlank(parameters.first)) {
-      print.info(`${context.runtime.brand} generate container <name>\n`)
+      print.info(`${toolbox.runtime.brand} generate container <name>\n`)
       print.info('A name is required.')
       return
     }
@@ -29,7 +29,7 @@ module.exports = {
       }
     ]
 
-    await ignite.copyBatch(context, jobs, props)
+    await ignite.copyBatch(toolbox, jobs, props)
 
     // if using `react-navigation` go the extra step
     // and insert the container into the nav router

@@ -1,16 +1,16 @@
-const patterns = require('../lib/patterns')
+const patterns = require('../../lib/patterns')
 
 module.exports = {
   description: 'Generates an opinionated container.',
-  run: async function(context) {
+  run: async function(toolbox) {
     // grab some features
-    const { parameters, print, strings, ignite, filesystem } = context
+    const { parameters, print, strings, ignite, filesystem } = toolbox
     const { pascalCase, isBlank } = strings
     const config = ignite.loadIgniteConfig()
 
     // validation
     if (isBlank(parameters.first)) {
-      print.info(`${context.runtime.brand} generate screen <name>\n`)
+      print.info(`${toolbox.runtime.brand} generate screen <name>\n`)
       print.info('A name is required.')
       return
     }
@@ -31,7 +31,7 @@ module.exports = {
     ]
 
     // make the templates
-    await ignite.copyBatch(context, jobs, props)
+    await ignite.copyBatch(toolbox, jobs, props)
 
     // if using `react-navigation` go the extra step
     // and insert the screen into the nav router

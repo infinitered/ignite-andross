@@ -1,8 +1,8 @@
 module.exports = {
   description: 'Generates a component, styles, and an optional test.',
-  run: async function(context) {
+  run: async function(toolbox) {
     // grab some features
-    const { parameters, strings, print, ignite } = context
+    const { parameters, strings, print, ignite } = toolbox
     const { pascalCase, isBlank } = strings
     const config = ignite.loadIgniteConfig()
     const { tests } = config
@@ -13,7 +13,7 @@ module.exports = {
 
     // validation
     if (isBlank(parameters.first) && !hasFolder) {
-      print.info(`${context.runtime.brand} generate component <name>\n`)
+      print.info(`${toolbox.runtime.brand} generate component <name>\n`)
       print.info('A name is required.')
       return
     }
@@ -27,9 +27,7 @@ module.exports = {
     if (name === 'Index') {
       name = 'index'
     }
-    const relativePath = pathComponents.length
-      ? pathComponents.join('/') + '/'
-      : ''
+    const relativePath = pathComponents.length ? pathComponents.join('/') + '/' : ''
 
     const props = { name }
     const jobs = [
@@ -47,6 +45,6 @@ module.exports = {
       }
     ]
 
-    await ignite.copyBatch(context, jobs, props)
+    await ignite.copyBatch(toolbox, jobs, props)
   }
 }

@@ -31,9 +31,7 @@ async function install(context) {
   const perfStart = new Date().getTime()
 
   const name = parameters.first
-  const spinner = print
-    .spin(`using the ${red('Infinite Red')} boilerplate v2 (code name 'Andross')`)
-    .succeed()
+  const spinner = print.spin(`using the ${red('Infinite Red')} boilerplate v2 (code name 'Andross')`).succeed()
 
   // attempt to install React Native or die trying
   const rnInstall = await reactNative.install({
@@ -61,6 +59,7 @@ async function install(context) {
     overwrite: true,
     matching: '!*.ejs'
   })
+  filesystem.dir(`${process.cwd()}/ignite`)
   spinner.stop()
 
   // --max, --min, interactive
@@ -94,7 +93,7 @@ async function install(context) {
     i18n: answers['i18n']
   }
   await ignite.copyBatch(context, templates, templateProps, {
-    quiet: true,
+    quiet: !parameters.options.debug,
     directory: `${ignite.ignitePluginPath()}/boilerplate`
   })
 
@@ -109,33 +108,28 @@ async function install(context) {
   /**
    * Merge the package.json from our template into the one provided from react-native init.
    */
-  async function mergePackageJsons() {
-    // transform our package.json in case we need to replace variables
-    const rawJson = await template.generate({
-      directory: `${ignite.ignitePluginPath()}/boilerplate`,
-      template: 'package.json.ejs',
-      props: templateProps
-    })
-    const newPackageJson = JSON.parse(rawJson)
 
-    // read in the react-native created package.json
-    const currentPackage = filesystem.read('package.json', 'json')
+  // transform our package.json in case we need to replace variables
+  const rawJson = await template.generate({
+    directory: `${ignite.ignitePluginPath()}/boilerplate`,
+    template: 'package.json.ejs',
+    props: templateProps
+  })
+  const newPackageJson = JSON.parse(rawJson)
 
-    // deep merge, lol
-    const newPackage = pipe(
-      assoc('dependencies', merge(currentPackage.dependencies, newPackageJson.dependencies)),
-      assoc(
-        'devDependencies',
-        merge(currentPackage.devDependencies, newPackageJson.devDependencies)
-      ),
-      assoc('scripts', merge(currentPackage.scripts, newPackageJson.scripts)),
-      merge(__, omit(['dependencies', 'devDependencies', 'scripts'], newPackageJson))
-    )(currentPackage)
+  // read in the react-native created package.json
+  const currentPackage = filesystem.read('package.json', 'json')
 
-    // write this out
-    filesystem.write('package.json', newPackage, { jsonIndent: 2 })
-  }
-  await mergePackageJsons()
+  // deep merge, lol
+  const newPackage = pipe(
+    assoc('dependencies', merge(currentPackage.dependencies, newPackageJson.dependencies)),
+    assoc('devDependencies', merge(currentPackage.devDependencies, newPackageJson.devDependencies)),
+    assoc('scripts', merge(currentPackage.scripts, newPackageJson.scripts)),
+    merge(__, omit(['dependencies', 'devDependencies', 'scripts'], newPackageJson))
+  )(currentPackage)
+
+  // write this out
+  filesystem.write('package.json', newPackage, { jsonIndent: 2 })
 
   spinner.stop()
 
@@ -162,33 +156,27 @@ async function install(context) {
     await ignite.addModule('react-navigation', { version: '3.0.0' })
     await ignite.addModule('react-native-gesture-handler', { version: '1.0.9', link: true })
 
-    ignite.patchInFile(
-      `${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`,
-      {
-        after: 'import com.facebook.react.ReactActivity;',
-        insert: `
+    ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
+      after: 'import com.facebook.react.ReactActivity;',
+      insert: `
       import com.facebook.react.ReactActivityDelegate;
       import com.facebook.react.ReactRootView;
       import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;`
-      }
-    )
+    })
 
-    ignite.patchInFile(
-      `${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`,
-      {
-        after: `public class MainActivity extends ReactActivity {`,
-        insert:
-          '\n  @Override\n' +
-          '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
-          '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
-          '      @Override\n' +
-          '      protected ReactRootView createRootView() {\n' +
-          '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
-          '      }\n' +
-          '    };\n' +
-          '  }'
-      }
-    )
+    ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
+      after: `public class MainActivity extends ReactActivity {`,
+      insert:
+        '\n  @Override\n' +
+        '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
+        '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
+        '      @Override\n' +
+        '      protected ReactRootView createRootView() {\n' +
+        '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
+        '      }\n' +
+        '    };\n' +
+        '  }'
+    })
     if (answers['vector-icons'] === 'react-native-vector-icons') {
       await system.spawn(`ignite add vector-icons@1.1.1 ${debugFlag}`, {
         stdio: 'inherit'
@@ -219,7 +207,7 @@ async function install(context) {
       })
     }
 
-    if (parameters.options.lint !== 'false') {
+    if (parameters.options.lint !== false) {
       await system.spawn(`ignite add standard@1.0.0 ${debugFlag}`, {
         stdio: 'inherit'
       })
