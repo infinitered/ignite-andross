@@ -44,7 +44,8 @@ module.exports = {
         message: typeCodeMessage,
         choices: typeCodeChoices
       })
-      typeCode = codeAnswers.type === typeCodeChoices[0] ? 'flatlist' : 'listview'
+      typeCode = codeAnswers.type[0] === typeCodeChoices[0] ? 'flatlist' : 'listview'
+      
     }
 
     if (!type) {
@@ -55,7 +56,9 @@ module.exports = {
         message: typeMessage,
         choices: typeChoices
       })
-      type = answers.type
+     
+      type = answers.type[0] === typeDataChoices[0] ? 'row' : 'grid'
+     
     }
 
     if (!dataType) {
@@ -66,7 +69,7 @@ module.exports = {
         message: typeDataMessage,
         choices: typeDataChoices
       })
-      dataType = dataAnswers.type
+      dataType = dataAnswers.type[0] === typeDataChoices[0] ? 'single' : 'sectioned'
     }
 
     // Sorry the following is so confusing, but so are React Native lists
