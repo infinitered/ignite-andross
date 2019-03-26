@@ -1,5 +1,5 @@
 const options = require('./options')
-const { merge, pipe, assoc, omit, __ } = require('ramda')
+const { mergeDeepRight, pipe, assoc, omit, __ } = require('ramda')
 const { getReactNativeVersion } = require('./lib/react-native-version')
 
 /**
@@ -134,14 +134,14 @@ async function install (context) {
     const newPackage = pipe(
       assoc(
         'dependencies',
-        merge(currentPackage.dependencies, newPackageJson.dependencies)
+        mergeDeepRight(currentPackage.dependencies, newPackageJson.dependencies)
       ),
       assoc(
         'devDependencies',
-        merge(currentPackage.devDependencies, newPackageJson.devDependencies)
+        mergeDeepRight(currentPackage.devDependencies, newPackageJson.devDependencies)
       ),
-      assoc('scripts', merge(currentPackage.scripts, newPackageJson.scripts)),
-      merge(
+      assoc('scripts', mergeDeepRight(currentPackage.scripts, newPackageJson.scripts)),
+      mergeDeepRight(
         __,
         omit(['dependencies', 'devDependencies', 'scripts'], newPackageJson)
       )
@@ -198,17 +198,17 @@ async function install (context) {
       '  }'
     })
     if (answers['vector-icons'] === 'react-native-vector-icons') {
-      await system.spawn(`ignite add vector-icons@"~>1.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add vector-icons@1.1.1 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (answers['i18n'] === 'react-native-i18n') {
-      await system.spawn(`ignite add i18n@"~>1.0.0" ${debugFlag}`, { stdio: 'inherit' })
+      await system.spawn(`ignite add i18n@1.2.0 ${debugFlag}`, { stdio: 'inherit' })
     }
 
     if (answers['animatable'] === 'react-native-animatable') {
-      await system.spawn(`ignite add animatable@"~>1.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add animatable@1.0.2 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
@@ -216,19 +216,19 @@ async function install (context) {
     // dev-screens be installed after vector-icons and animatable so that it can
     // conditionally patch its PluginExamplesScreen
     if (answers['dev-screens'] === 'Yes') {
-      await system.spawn(`ignite add dev-screens@"~>2.3.0" ${debugFlag}`, {
+      await system.spawn(`ignite add dev-screens@"2.4.3" ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (answers['redux-persist'] === 'Yes') {
-      await system.spawn(`ignite add redux-persist@"~>5.10.0" ${debugFlag}`, {
+      await system.spawn(`ignite add redux-persist@1.1.2 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (parameters.options.lint !== 'false') {
-      await system.spawn(`ignite add standard@"~>1.0.0" ${debugFlag}`, {
+      await system.spawn(`ignite add standard@1.0.0 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }

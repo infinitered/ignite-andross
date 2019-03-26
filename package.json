@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": "infinitered/ignite-andross",
   "homepage": "https://github.com/infinitered/ignite-andross",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "files": [
     "boilerplate",
     "commands",
@@ -23,11 +23,12 @@
     "url": "https://github.com/infinitered/ignite-andross"
   },
   "scripts": {
+    "check-ignite": "which ignite # Checking if Ignite CLI is installed globally",
     "lint": "standard",
     "test": "jest",
     "watch": "jest --runInBand --watch",
     "coverage": "jest --runInBand --coverage",
-    "ci:test": "yarn test",
+    "ci:test": "yarn check-ignite && yarn test",
     "ci:publish": "yarn semantic-release",
     "semantic-release": "semantic-release"
   },
@@ -72,6 +73,6 @@
     "socks": "^2.1.6"
   },
   "dependencies": {
-    "ramda": "^0.23.0"
+    "ramda": "^0.26.1"
   }
 }
