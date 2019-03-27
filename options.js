@@ -15,10 +15,10 @@ const questions = [
     choices: ['none', 'react-native-vector-icons']
   },
   {
-    name: 'i18n',
+    name: 'languages',
     message: 'What internationalization library will you use?',
     type: 'list',
-    choices: ['none', 'react-native-i18n']
+    choices: ['none', 'react-native-languages']
   },
   {
     name: 'animatable',
@@ -40,7 +40,7 @@ const questions = [
 const max = {
   'dev-screens': 'Yes',
   'vector-icons': 'react-native-vector-icons',
-  i18n: 'react-native-i18n',
+  languages: 'react-native-languages',
   animatable: 'react-native-animatable',
   'redux-persist': 'Yes'
 }
@@ -51,7 +51,7 @@ const max = {
 const min = {
   'dev-screens': 'No',
   'vector-icons': 'none',
-  i18n: 'none',
+  languages: 'none',
   animatable: 'none',
   'redux-persist': 'No'
 }

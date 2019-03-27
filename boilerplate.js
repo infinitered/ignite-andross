@@ -100,7 +100,7 @@ async function install (context) {
     reactNativeVersion: rnInstall.version,
     vectorIcons: answers['vector-icons'],
     animatable: answers['animatable'],
-    i18n: answers['i18n']
+    languages: answers['languages']
   }
   await ignite.copyBatch(context, templates, templateProps, {
     quiet: true,
@@ -203,8 +203,9 @@ async function install (context) {
       })
     }
 
-    if (answers['i18n'] === 'react-native-i18n') {
-      await system.spawn(`ignite add i18n@"~>1.0.0" ${debugFlag}`, { stdio: 'inherit' })
+    if (answers['languages'] === 'react-native-languages') {
+      await ignite.addModule('react-native-languages', { version: '3.0.2', link: true })
+      await ignite.addModule('i18n-js', { version: '3.1.0' })
     }
 
     if (answers['animatable'] === 'react-native-animatable') {
