@@ -174,8 +174,8 @@ async function install (context) {
     await system.spawn(`ignite add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
 
     // now run install of Ignite Plugins
-    await ignite.addModule('react-navigation', { version: '3.0.0' })
-    await ignite.addModule('react-native-gesture-handler', { version: '1.0.9', link: true })
+    await ignite.addModule('react-navigation', { version: '3.5.1' })
+    await ignite.addModule('react-native-gesture-handler', { version: '1.1.0', link: true })
 
     ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
       after: 'import com.facebook.react.ReactActivity;',
