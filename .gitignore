@@ -19,3 +19,4 @@ integration_test
 # WebStorm
 .idea
 yarn-error.log
+.vscode
