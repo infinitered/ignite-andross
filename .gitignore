@@ -19,3 +19,5 @@ integration_test
 
 # WebStorm
 .idea
+.vscode
+package-lock.json
