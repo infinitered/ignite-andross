@@ -34,9 +34,11 @@ async function install(context) {
   const spinner = print.spin(`using the ${red('Infinite Red')} boilerplate v2 (code name 'Andross')`).succeed()
 
   // attempt to install React Native or die trying
+  const useNpm = !ignite.useYarn
   const rnInstall = await reactNative.install({
     name,
-    version: getReactNativeVersion(context)
+    version: getReactNativeVersion(context),
+    useNpm,
   })
   if (rnInstall.exitCode > 0) process.exit(rnInstall.exitCode)
 
