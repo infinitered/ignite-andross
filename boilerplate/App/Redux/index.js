@@ -20,7 +20,7 @@ export default () => {
       const newYieldedSagas = require('../Sagas').default
       sagasManager.cancel()
       sagasManager.done.then(() => {
-        sagasManager = sagaMiddleware.run(newYieldedSagas)
+        sagasManager = sagaMiddleware(newYieldedSagas)
       })
     })
   }

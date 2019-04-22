@@ -1,5 +1,5 @@
 const options = require('./options')
-const { merge, pipe, assoc, omit, __ } = require('ramda')
+const { mergeDeepRight, pipe, assoc, omit, __ } = require('ramda')
 const { getReactNativeVersion } = require('./lib/react-native-version')
 
 /**
@@ -136,14 +136,14 @@ async function install (context) {
     const newPackage = pipe(
       assoc(
         'dependencies',
-        merge(currentPackage.dependencies, newPackageJson.dependencies)
+        mergeDeepRight(currentPackage.dependencies, newPackageJson.dependencies)
       ),
       assoc(
         'devDependencies',
-        merge(currentPackage.devDependencies, newPackageJson.devDependencies)
+        mergeDeepRight(currentPackage.devDependencies, newPackageJson.devDependencies)
       ),
-      assoc('scripts', merge(currentPackage.scripts, newPackageJson.scripts)),
-      merge(
+      assoc('scripts', mergeDeepRight(currentPackage.scripts, newPackageJson.scripts)),
+      mergeDeepRight(
         __,
         omit(['dependencies', 'devDependencies', 'scripts'], newPackageJson)
       )
