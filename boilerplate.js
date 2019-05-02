@@ -194,7 +194,7 @@ async function install(context) {
     // dev-screens be installed after vector-icons and animatable so that it can
     // conditionally patch its PluginExamplesScreen
     if (answers['dev-screens'] === 'Yes') {
-      await system.spawn(`ignite add dev-screens@"2.4.3" ${debugFlag}`, {
+      await system.spawn(`ignite add dev-screens@"2.4.4" ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
