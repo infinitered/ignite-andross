@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": "infinitered/ignite-andross",
   "homepage": "https://github.com/infinitered/ignite-andross",
-  "version": "3.2.1",
+  "version": "4.0.0-beta.3",
   "files": [
     "boilerplate",
     "commands",
@@ -43,6 +43,11 @@
       "expect",
       "describe"
     ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 120
   },
   "release": {
     "plugins": [

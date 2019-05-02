@@ -10,7 +10,7 @@ const { getReactNativeVersion } = require('./lib/react-native-version')
  * @param {*} context - The gluegun context.
  * @returns {boolean}
  */
-const isAndroidInstalled = function (context) {
+const isAndroidInstalled = function(context) {
   const androidHome = process.env['ANDROID_HOME']
   const hasAndroidEnv = !context.strings.isBlank(androidHome)
   const hasAndroid = hasAndroidEnv && context.filesystem.exists(`${androidHome}/tools`) === 'dir'
@@ -23,26 +23,15 @@ const isAndroidInstalled = function (context) {
  *
  * @param {any} context - The gluegun context.
  */
-async function install (context) {
-  const {
-    filesystem,
-    parameters,
-    ignite,
-    reactNative,
-    print,
-    system,
-    prompt,
-    template
-  } = context
+async function install(context) {
+  const { filesystem, parameters, ignite, reactNative, print, system, prompt, template } = context
   const { colors } = print
   const { red, yellow, bold, gray, blue } = colors
 
-  const perfStart = (new Date()).getTime()
+  const perfStart = new Date().getTime()
 
-  const name = parameters.third
-  const spinner = print
-    .spin(`using the ${red('Infinite Red')} boilerplate v2 (code name 'Andross')`)
-    .succeed()
+  const name = parameters.first
+  const spinner = print.spin(`using the ${red('Infinite Red')} boilerplate v2 (code name 'Andross')`).succeed()
 
   // attempt to install React Native or die trying
   const useNpm = !ignite.useYarn
@@ -72,6 +61,7 @@ async function install (context) {
     overwrite: true,
     matching: '!*.ejs'
   })
+  filesystem.dir(`${process.cwd()}/ignite`)
   spinner.stop()
 
   // --max, --min, interactive
@@ -105,7 +95,7 @@ async function install (context) {
     i18n: answers['i18n']
   }
   await ignite.copyBatch(context, templates, templateProps, {
-    quiet: true,
+    quiet: !parameters.options.debug,
     directory: `${ignite.ignitePluginPath()}/boilerplate`
   })
 
@@ -117,42 +107,27 @@ async function install (context) {
   filesystem.append('.gitignore', '\n# Misc\n#')
   filesystem.append('.gitignore', '\n.env\n')
 
-  /**
-   * Merge the package.json from our template into the one provided from react-native init.
-   */
-  async function mergePackageJsons () {
-    // transform our package.json in case we need to replace variables
-    const rawJson = await template.generate({
-      directory: `${ignite.ignitePluginPath()}/boilerplate`,
-      template: 'package.json.ejs',
-      props: templateProps
-    })
-    const newPackageJson = JSON.parse(rawJson)
+  // transform our package.json in case we need to replace variables
+  const rawJson = await template.generate({
+    directory: `${ignite.ignitePluginPath()}/boilerplate`,
+    template: 'package.json.ejs',
+    props: templateProps
+  })
+  const newPackageJson = JSON.parse(rawJson)
 
-    // read in the react-native created package.json
-    const currentPackage = filesystem.read('package.json', 'json')
+  // read in the react-native created package.json
+  const currentPackage = filesystem.read('package.json', 'json')
 
-    // deep merge, lol
-    const newPackage = pipe(
-      assoc(
-        'dependencies',
-        mergeDeepRight(currentPackage.dependencies, newPackageJson.dependencies)
-      ),
-      assoc(
-        'devDependencies',
-        mergeDeepRight(currentPackage.devDependencies, newPackageJson.devDependencies)
-      ),
-      assoc('scripts', mergeDeepRight(currentPackage.scripts, newPackageJson.scripts)),
-      mergeDeepRight(
-        __,
-        omit(['dependencies', 'devDependencies', 'scripts'], newPackageJson)
-      )
-    )(currentPackage)
+  // deep merge, lol
+  const newPackage = pipe(
+    assoc('dependencies', mergeDeepRight(currentPackage.dependencies, newPackageJson.dependencies)),
+    assoc('devDependencies', mergeDeepRight(currentPackage.devDependencies, newPackageJson.devDependencies)),
+    assoc('scripts', mergeDeepRight(currentPackage.scripts, newPackageJson.scripts)),
+    mergeDeepRight(__, omit(['dependencies', 'devDependencies', 'scripts'], newPackageJson))
+  )(currentPackage)
 
-    // write this out
-    filesystem.write('package.json', newPackage, { jsonIndent: 2 })
-  }
-  await mergePackageJsons()
+  // write this out
+  filesystem.write('package.json', newPackage, { jsonIndent: 2 })
 
   spinner.stop()
 
@@ -189,15 +164,16 @@ async function install (context) {
 
     ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
       after: `public class MainActivity extends ReactActivity {`,
-      insert: '\n  @Override\n' +
-      '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
-      '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
-      '      @Override\n' +
-      '      protected ReactRootView createRootView() {\n' +
-      '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
-      '      }\n' +
-      '    };\n' +
-      '  }'
+      insert:
+        '\n  @Override\n' +
+        '  protected ReactActivityDelegate createReactActivityDelegate() {\n' +
+        '    return new ReactActivityDelegate(this, getMainComponentName()) {\n' +
+        '      @Override\n' +
+        '      protected ReactRootView createRootView() {\n' +
+        '       return new RNGestureHandlerEnabledRootView(MainActivity.this);\n' +
+        '      }\n' +
+        '    };\n' +
+        '  }'
     })
     if (answers['vector-icons'] === 'react-native-vector-icons') {
       await system.spawn(`ignite add vector-icons@1.1.1 ${debugFlag}`, {
@@ -218,7 +194,7 @@ async function install (context) {
     // dev-screens be installed after vector-icons and animatable so that it can
     // conditionally patch its PluginExamplesScreen
     if (answers['dev-screens'] === 'Yes') {
-      await system.spawn(`ignite add dev-screens@"2.4.3" ${debugFlag}`, {
+      await system.spawn(`ignite add dev-screens@"2.4.4" ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
@@ -229,7 +205,7 @@ async function install (context) {
       })
     }
 
-    if (parameters.options.lint !== 'false') {
+    if (parameters.options.lint !== false) {
       await system.spawn(`ignite add standard@1.0.0 ${debugFlag}`, {
         stdio: 'inherit'
       })
@@ -252,11 +228,14 @@ async function install (context) {
     spinner.succeed(`configured git`)
   }
 
-  const perfDuration = parseInt(((new Date()).getTime() - perfStart) / 10) / 100
+  const perfDuration = parseInt((new Date().getTime() - perfStart) / 10) / 100
   spinner.succeed(`ignited ${yellow(name)} in ${perfDuration}s`)
 
-  const androidInfo = isAndroidInstalled(context) ? ''
-    : `\n\nTo run in Android, make sure you've followed the latest react-native setup instructions at https://facebook.github.io/react-native/docs/getting-started.html before using ignite.\nYou won't be able to run ${bold('react-native run-android')} successfully until you have.`
+  const androidInfo = isAndroidInstalled(context)
+    ? ''
+    : `\n\nTo run in Android, make sure you've followed the latest react-native setup instructions at https://facebook.github.io/react-native/docs/getting-started.html before using ignite.\nYou won't be able to run ${bold(
+        'react-native run-android'
+      )} successfully until you have.`
 
   const successMessage = `
     ${red('Ignite CLI')} ignited ${yellow(name)} in ${gray(`${perfDuration}s`)}
@@ -268,7 +247,9 @@ async function install (context) {
       react-native run-android${androidInfo}
       ignite --help
 
-    ${gray('Read the walkthrough at https://github.com/infinitered/ignite-andross/blob/master/readme.md#boilerplate-walkthrough')}
+    ${gray(
+      'Read the walkthrough at https://github.com/infinitered/ignite-andross/blob/master/readme.md#boilerplate-walkthrough'
+    )}
 
     ${blue('Need additional help? Join our Slack community at http://community.infinite.red.')}
 
