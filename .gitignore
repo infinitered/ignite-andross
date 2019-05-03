@@ -1,11 +1,8 @@
-# OSX
-#
 .DS_Store
 npm-debug.log
 npm-debug.log*
 coverage
 .nyc_output
-yarn.lock
 lerna-debug.log
 node_modules
 .vscode/*
@@ -16,6 +13,7 @@ node_modules
 testgrounds
 IntegrationTest
 integration_test
-
-# WebStorm
 .idea
+yarn-error.log
+.vscode
+package-lock.json
