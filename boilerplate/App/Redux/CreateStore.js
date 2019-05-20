@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
 import ScreenTracking from './ScreenTrackingMiddleware'
-import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers'
 import { appNavigatorMiddleware } from '../Navigation/ReduxNavigation'
 
 // creates the store
