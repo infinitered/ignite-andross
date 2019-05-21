@@ -7,7 +7,7 @@ import {
 import { connect } from 'react-redux'
 import AppNavigation from './AppNavigation'
 
-createReactNavigationReduxMiddleware(
+export const appNavigatorMiddleware = createReactNavigationReduxMiddleware(
   'root',
   (state) => state.nav
 )
