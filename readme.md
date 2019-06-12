@@ -11,7 +11,7 @@ NOTE: This repo has been renamed from ignite-ir-boilerplate-andross to ignite-an
 Currently includes:
 
 * React Native 0.59.3
-* React Navigation 3.0.0
+* React Navigation 3.11.0
 * Redux
 * Redux Sagas
 * And more!
