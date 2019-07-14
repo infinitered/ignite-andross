@@ -151,7 +151,7 @@ async function install(context) {
     await system.spawn(`ignite add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
 
     // now run install of Ignite Plugins
-    await ignite.addModule('react-navigation', { version: '3.0.0' })
+    await ignite.addModule('react-navigation', { version: '3.11.0' })
     await ignite.addModule('react-native-gesture-handler', { version: '1.3.0', link: true })
 
     ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {

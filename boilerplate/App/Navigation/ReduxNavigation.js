@@ -2,17 +2,17 @@ import * as React from 'react'
 import { BackHandler, Platform } from 'react-native'
 import {
   createReactNavigationReduxMiddleware,
-  reduxifyNavigator
+  createReduxContainer
 } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 import AppNavigation from './AppNavigation'
 
 export const appNavigatorMiddleware = createReactNavigationReduxMiddleware(
-  'root',
-  (state) => state.nav
+  (state) => state.nav,
+  'root'
 )
 
-const ReduxAppNavigator = reduxifyNavigator(AppNavigation, 'root')
+const ReduxAppNavigator = createReduxContainer(AppNavigation, 'root')
 
 class ReduxNavigation extends React.Component {
   componentDidMount () {
