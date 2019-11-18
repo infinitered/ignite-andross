@@ -5,7 +5,7 @@ import { reactotronRedux as reduxPlugin } from 'reactotron-redux'
 import sagaPlugin from 'reactotron-redux-saga'
 
 const reactotron = Reactotron
-    .configure({ name: 'PauseLecture' })
+    .configure({ name: 'Ignite App' })
     .useReactNative()
     .use(reduxPlugin({ onRestore: Immutable }))
     .use(sagaPlugin())
