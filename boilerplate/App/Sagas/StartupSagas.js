@@ -21,7 +21,7 @@ export function * startup (action) {
     const subObject = { a: 1, b: [1, 2, 3], c: true }
     subObject.circularDependency = subObject // osnap!
     console.tron.display({
-      name: '🔥 IGNITE 🔥',
+      name: '🔥 PauseLecture 🔥',
       preview: 'You should totally expand this',
       value: {
         '💃': 'Welcome to the future!',

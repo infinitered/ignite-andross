@@ -3,6 +3,7 @@ import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
 import ScreenTracking from './ScreenTrackingMiddleware'
 import { appNavigatorMiddleware } from '../Navigation/ReduxNavigation'
+import Reactotron from '../Config/ReactotronConfig'
 
 // creates the store
 export default (rootReducer, rootSaga) => {
@@ -28,7 +29,10 @@ export default (rootReducer, rootSaga) => {
   enhancers.push(applyMiddleware(...middleware))
 
   // if Reactotron is enabled (default for __DEV__), we'll create the store through Reactotron
-  const createAppropriateStore = Config.useReactotron ? console.tron.createStore : createStore
+  const createAppropriateStore = createStore
+  if (Config.useReactotron) {
+    enhancers.push(Reactotron.createEnhancer())
+  }
   const store = createAppropriateStore(rootReducer, compose(...enhancers))
 
   // kick off root saga
