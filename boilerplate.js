@@ -134,7 +134,7 @@ async function install(context) {
   // react native link -- must use spawn & stdio: ignore or it hangs!! :(
   spinner.text = `▸ linking native libraries`
   spinner.start()
-  await system.spawn('react-native link', { stdio: 'ignore' })
+  await system.spawn('npx react-native link', { stdio: 'ignore' })
   spinner.stop()
 
   // pass long the debug flag if we're running in that mode
@@ -148,7 +148,7 @@ async function install(context) {
     // Could be directory, npm@version, or just npm name.  Default to passed in values
     const boilerplate = parameters.options.b || parameters.options.boilerplate || 'ignite-andross'
 
-    await system.spawn(`ignite add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
+    await system.spawn(`npx ignite-cli add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
 
     // now run install of Ignite Plugins
     await ignite.addModule('react-navigation', { version: '3.11.0' })
@@ -176,17 +176,17 @@ async function install(context) {
         '  }'
     })
     if (answers['vector-icons'] === 'react-native-vector-icons') {
-      await system.spawn(`ignite add vector-icons@1.1.1 ${debugFlag}`, {
+      await system.spawn(`npx ignite-cli add vector-icons@1.1.1 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (answers['i18n'] === 'react-native-i18n') {
-      await system.spawn(`ignite add i18n@1.2.0 ${debugFlag}`, { stdio: 'inherit' })
+      await system.spawn(`npx ignite-cli add i18n@1.2.0 ${debugFlag}`, { stdio: 'inherit' })
     }
 
     if (answers['animatable'] === 'react-native-animatable') {
-      await system.spawn(`ignite add animatable@1.0.2 ${debugFlag}`, {
+      await system.spawn(`npx ignite-cli add animatable@1.0.2 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
@@ -194,19 +194,19 @@ async function install(context) {
     // dev-screens be installed after vector-icons and animatable so that it can
     // conditionally patch its PluginExamplesScreen
     if (answers['dev-screens'] === 'Yes') {
-      await system.spawn(`ignite add dev-screens@"2.4.5" ${debugFlag}`, {
+      await system.spawn(`npx ignite-cli add dev-screens@"2.4.5" ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (answers['redux-persist'] === 'Yes') {
-      await system.spawn(`ignite add redux-persist@1.1.2 ${debugFlag}`, {
+      await system.spawn(`npx ignite-cli add redux-persist@1.1.2 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
 
     if (parameters.options.lint !== false) {
-      await system.spawn(`ignite add standard@1.0.0 ${debugFlag}`, {
+      await system.spawn(`npx ignite-cli add standard@1.0.0 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
@@ -243,9 +243,9 @@ async function install(context) {
     To get started:
 
       cd ${name}
-      react-native run-ios
-      react-native run-android${androidInfo}
-      ignite --help
+      npx react-native run-ios
+      npx react-native run-android${androidInfo}
+      npx ignite-cli --help
 
     ${gray(
       'Read the walkthrough at https://github.com/infinitered/ignite-andross/blob/master/readme.md#boilerplate-walkthrough'

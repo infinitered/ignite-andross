@@ -6,7 +6,7 @@
 defaults: &defaults
   docker:
     # Choose the version of Node you want here
-    - image: circleci/node:10.11
+    - image: circleci/node:13.5
   working_directory: ~/repo
 
 version: 2
@@ -41,10 +41,6 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run:
-          name: Install React Native CLI and Ignite CLI
-          command: |
-            sudo npm i -g ignite-cli@next react-native-cli
       - run:
           name: Run tests
           command: yarn ci:test # this command will be added to/found in your package.json scripts
