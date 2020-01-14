@@ -17,10 +17,10 @@
 1. cd to the repo
 2. Run Build for either OS
   * for iOS
-    * run `react-native run-ios`
+    * run `npx react-native run-ios`
   * for Android
     * Run Genymotion
-    * run `react-native run-android`
+    * run `npx react-native run-android`
 
 ## :no_entry_sign: Standard Compliant
 

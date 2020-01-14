@@ -23,12 +23,11 @@
     "url": "https://github.com/infinitered/ignite-andross"
   },
   "scripts": {
-    "check-ignite": "which ignite # Checking if Ignite CLI is installed globally",
     "lint": "standard",
     "test": "jest",
     "watch": "jest --runInBand --watch",
     "coverage": "jest --runInBand --coverage",
-    "ci:test": "yarn check-ignite && yarn test",
+    "ci:test": "yarn test",
     "ci:publish": "yarn semantic-release",
     "semantic-release": "semantic-release"
   },
