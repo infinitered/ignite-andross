@@ -120,7 +120,7 @@ async function install(context) {
 
   // deep merge, lol
   const newPackage = pipe(
-    assoc('dependencies', mergeDeepRight(currentPackage.dependencies, newPackageJson.dependencies)),
+    assoc('dependencies', mergeDeepRight(currentPackage.devDependencies, newPackageJson.dependencies)),
     assoc('devDependencies', mergeDeepRight(currentPackage.devDependencies, newPackageJson.devDependencies)),
     assoc('scripts', mergeDeepRight(currentPackage.scripts, newPackageJson.scripts)),
     mergeDeepRight(__, omit(['dependencies', 'devDependencies', 'scripts'], newPackageJson))
