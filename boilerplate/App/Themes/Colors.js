@@ -1,4 +1,5 @@
 const colors = {
+  themeColor: '#e73536',
   background: '#1F0808',
   clear: 'rgba(0,0,0,0)',
   facebook: '#3b5998',

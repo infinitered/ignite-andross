@@ -4,9 +4,15 @@ import { Images } from '../Themes'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
+import RoundedButton from '../Components/RoundedButton';
 
 export default class LaunchScreen extends Component {
   render () {
+    const {
+      route: {name = ''},
+    } = this.props;
+    const isFirstScreen = name === 'LaunchScreen'
+    const nextScreen = () => this.props.navigation.navigate('TabScreen')
     return (
       <View style={styles.mainContainer}>
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
@@ -21,7 +27,7 @@ export default class LaunchScreen extends Component {
               This probably isn't what your app is going to look like. Unless your designer handed you this screen and, in that case, congrats! You're ready to ship. For everyone else, this is where you'll see a live preview of your fully functioning app using Ignite.
             </Text>
           </View>
-
+          {isFirstScreen && <RoundedButton onPress={nextScreen} text={'Go To Tabs'} />}
         </ScrollView>
       </View>
     )
