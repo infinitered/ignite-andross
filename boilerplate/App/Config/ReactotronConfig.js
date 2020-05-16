@@ -1,10 +1,10 @@
-import {NativeModules} from 'react-native'
-import Config from '../Config/DebugConfig'
-import Immutable from 'seamless-immutable'
-import Reactotron from 'reactotron-react-native'
-import { reactotronRedux as reduxPlugin } from 'reactotron-redux'
-import sagaPlugin from 'reactotron-redux-saga'
-import AsyncStorage from '@react-native-community/async-storage'
+import {NativeModules} from 'react-native';
+import Config from '../Config/DebugConfig';
+import Immutable from 'seamless-immutable';
+import Reactotron from 'reactotron-react-native';
+import {reactotronRedux as reduxPlugin} from 'reactotron-redux';
+import sagaPlugin from 'reactotron-redux-saga';
+import AsyncStorage from '@react-native-community/async-storage';
 
 if (Config.useReactotron) {
   const scriptURL = NativeModules.SourceCode.scriptURL;
@@ -13,7 +13,7 @@ if (Config.useReactotron) {
   Reactotron.configure({name: 'Ignite App', host: scriptHostname})
     .setAsyncStorageHandler(AsyncStorage)
     .useReactNative()
-    .use(reduxPlugin({ onRestore: Immutable }))
+    .use(reduxPlugin({onRestore: Immutable}))
     .use(sagaPlugin())
     .connect();
 
