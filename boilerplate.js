@@ -85,6 +85,7 @@ async function install(context) {
     { template: 'react-native.config.js', target: 'react-native.config.js' },
     { template: 'README.md', target: 'README.md' },
     { template: 'ignite.json.ejs', target: 'ignite/ignite.json' },
+    { template: '.eslintignore', target: '.eslintignore' },
     { template: '.editorconfig', target: '.editorconfig' },
     { template: 'Tests/Setup.js.ejs', target: 'Tests/Setup.js' },
     { template: 'storybook/storybook.ejs', target: 'storybook/storybook.js' },
