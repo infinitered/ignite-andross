@@ -1,18 +1,18 @@
-import React from 'react'
-import { View, SectionList, Text } from 'react-native'
-import { connect } from 'react-redux'
+import React from 'react';
+import {View, SectionList, Text} from 'react-native';
+import {connect} from 'react-redux';
 
 // More info here: https://facebook.github.io/react-native/docs/sectionlist.html
 
 // Styles
-import styles from './Styles/<%= props.name %>Style'
+import styles from './Styles/<%= props.name %>Style';
 
 class <%= props.name %> extends React.PureComponent {
   /* ***********************************************************
-  * STEP 1
-  * This is an array of objects with the properties you desire
-  * Usually this should come from Redux mapStateToProps
-  *************************************************************/
+   * STEP 1
+   * This is an array of objects with the properties you desire
+   * Usually this should come from Redux mapStateToProps
+   *************************************************************/
   state = {
     data: [
       {
@@ -27,9 +27,10 @@ class <%= props.name %> extends React.PureComponent {
           {title: 'Seventh Title', description: 'Seventh Description'},
           {title: 'Eighth Title', description: 'Eighth Description'},
           {title: 'Ninth Title', description: 'Ninth Description'},
-          {title: 'Tenth Title', description: 'Tenth Description'}
-        ]
-      }, {
+          {title: 'Tenth Title', description: 'Tenth Description'},
+        ],
+      },
+      {
         key: 'Second',
         data: [
           {title: 'Eleventh Title', description: 'Eleventh Description'},
@@ -42,81 +43,101 @@ class <%= props.name %> extends React.PureComponent {
           {title: '18th Title', description: '18th Description'},
           {title: '19th Title', description: '19th Description'},
           {title: '20th Title', description: '20th Description'},
-          {title: 'BLACKJACK!', description: 'BLACKJACK! Description'}
-        ]
-      }
-    ]
-  }
+          {title: 'BLACKJACK!', description: 'BLACKJACK! Description'},
+        ],
+      },
+    ],
+  };
 
   /* ***********************************************************
-  * STEP 3
-  * `renderItem` function - How each cell should be rendered
-  * It's our best practice to place a single component here:
-  *
-  * e.g.
-  *   return <MyCustomCell title={item.title} description={item.description} />
-  *
-  * For sections with different cells (heterogeneous lists), you can do branch
-  * logic here based on section.key OR at the data level, you can provide
-  * `renderItem` functions in each section.
-  *
-  * Note: You can remove section/separator functions and jam them in here
-  *************************************************************/
-  renderItem ({section, item}) {
+   * STEP 3
+   * `renderItem` function - How each cell should be rendered
+   * It's our best practice to place a single component here:
+   *
+   * e.g.
+   *   return <MyCustomCell title={item.title} description={item.description} />
+   *
+   * For sections with different cells (heterogeneous lists), you can do branch
+   * logic here based on section.key OR at the data level, you can provide
+   * `renderItem` functions in each section.
+   *
+   * Note: You can remove section/separator functions and jam them in here
+   *************************************************************/
+  renderItem({section, item}) {
     return (
       <View style={styles.row}>
-        <Text style={styles.boldLabel}>Section {section.key} - {item.title}</Text>
+        <Text style={styles.boldLabel}>
+          Section {section.key} - {item.title}
+        </Text>
         <Text style={styles.label}>{item.description}</Text>
       </View>
-    )
+    );
   }
 
   // Conditional branching for section headers, also see step 3
-  renderSectionHeader ({section}) {
+  renderSectionHeader({section}) {
     switch (section.key) {
       case 'First':
-        return <View style={styles.sectionHeader}><Text style={styles.boldLabel}>First Section</Text></View>
+        return (
+          <View style={styles.sectionHeader}>
+            <Text style={styles.boldLabel}>First Section</Text>
+          </View>;
+        );
       default:
-        return <View style={styles.sectionHeader}><Text style={styles.boldLabel}>Second Section</Text></View>
+        return (
+          <View style={styles.sectionHeader}>
+            <Text style={styles.boldLabel}>Second Section</Text>
+          </View>;
+        );
     }
   }
 
   /* ***********************************************************
-  * STEP 2
-  * Consider the configurations we've set below.  Customize them
-  * to your liking!  Each with some friendly advice.
-  *
-  * Removing a function here will make SectionList use default
-  *************************************************************/
+   * STEP 2
+   * Consider the configurations we've set below.  Customize them
+   * to your liking!  Each with some friendly advice.
+   *
+   * Removing a function here will make SectionList use default
+   *************************************************************/
   // Render a header?
-  renderHeader = () =>
-    <Text style={[styles.label, styles.sectionHeader]}> - Full List Header - </Text>
+  renderHeader = () => (
+    <Text style={[styles.label, styles.sectionHeader]}>
+      {' '}
+      - Full List Header -{' '}
+    </Text>
+  );
 
   // Render a footer?
-  renderFooter = () =>
-    <Text style={[styles.label, styles.sectionHeader]}> - Full List Footer - </Text>
+  renderFooter = () => (
+    <Text style={[styles.label, styles.sectionHeader]}>
+      {' '}
+      - Full List Footer -{' '}
+    </Text>
+  );
 
   // Does each section need a footer?
-  renderSectionFooter = () =>
+  renderSectionFooter = () => (
     <Text style={styles.label}> END SECTION!!!! </Text>
+  );
 
   // Show this when data is empty
-  renderEmpty = () =>
+  renderEmpty = () => (
     <Text style={styles.label}> - Nothing to See Here - </Text>
+  );
 
-  renderSeparator = () =>
-    <Text style={styles.label}> - ~~~~~ - </Text>
+  renderSeparator = () => <Text style={styles.label}> - ~~~~~ - </Text>;
 
-  renderSectionSeparator = () =>
+  renderSectionSeparator = () => (
     <Text style={styles.label}> \/\/\/\/\/\/\/\/ </Text>
+  );
 
   // The default function if no Key is provided is index
   // an identifiable key is important if you plan on
   // item reordering.  Otherwise index is fine
-  keyExtractor = (item, index) => `${index}`
+  keyExtractor = (item, index) => `${index}`;
 
   // How many items should be kept im memory as we scroll?
-  oneScreensWorth = 20
+  oneScreensWorth = 20;
 
   // extraData is for anything that is not indicated in data
   // for instance, if you kept "favorites" in `this.state.favs`
@@ -132,7 +153,7 @@ class <%= props.name %> extends React.PureComponent {
   //   {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index}
   // )}
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <SectionList
@@ -150,19 +171,18 @@ class <%= props.name %> extends React.PureComponent {
           renderSectionFooter={this.renderSectionFooter}
         />
       </View>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     // ...redux state to props here
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
+  return {};
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(<%= props.name %>)
+export default connect(mapStateToProps, mapDispatchToProps)(<%= props.name %>);
