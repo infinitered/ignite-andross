@@ -14,10 +14,7 @@ test('component structure', (t) => {
   t.is(wrapper.children().length, 1); // has 1 child
   t.is(wrapper.children().first().name(), 'Text'); // that child is Text
   t.true(
-    wrapper
-      .children()
-      .first()
-      .containsMatchingElement('<%= props.name %> Component'),
+    wrapper.children().first().containsMatchingElement('<%= props.name %> Component'),
   ); // That the Component Text is included
 });
 
