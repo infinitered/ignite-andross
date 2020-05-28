@@ -1,12 +1,16 @@
-import { StyleSheet } from 'react-native'
-import { ApplicationStyles, Metrics, Colors } from '../../../../../DevScreens/DevTheme/'
+import {StyleSheet} from 'react-native';
+import {
+  ApplicationStyles,
+  Metrics,
+  Colors,
+} from '../../../../../DevScreens/DevTheme/';
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
     marginTop: Metrics.navBarHeight,
-    backgroundColor: Colors.background
+    backgroundColor: Colors.background,
   },
   row: {
     width: 100,
@@ -15,23 +19,23 @@ export default StyleSheet.create({
     alignItems: 'center',
     margin: Metrics.baseMargin,
     backgroundColor: Colors.fire,
-    borderRadius: Metrics.smallMargin
+    borderRadius: Metrics.smallMargin,
   },
   boldLabel: {
     fontWeight: 'bold',
     alignSelf: 'center',
     color: Colors.snow,
     textAlign: 'center',
-    marginBottom: Metrics.smallMargin
+    marginBottom: Metrics.smallMargin,
   },
   label: {
     alignSelf: 'center',
     color: Colors.snow,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   listContent: {
     justifyContent: 'space-around',
     flexDirection: 'row',
-    flexWrap: 'wrap'
-  }
-})
+    flexWrap: 'wrap',
+  },
+});

@@ -41,6 +41,9 @@
       "test",
       "expect",
       "describe"
+    ],
+    "ignore": [
+      "/boilerplate/**/*.js"
     ]
   },
   "prettier": {

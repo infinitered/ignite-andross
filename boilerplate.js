@@ -31,7 +31,7 @@ async function install(context) {
   const perfStart = new Date().getTime()
 
   const name = parameters.first
-  const spinner = print.spin(`using the ${red('Infinite Red')} boilerplate v2 (code name 'Andross')`).succeed()
+  const spinner = print.spin(`using the ${red('Infinite Red')} boilerplate v3 (code name 'Andross')`).succeed()
 
   // attempt to install React Native or die trying
   const useNpm = !ignite.useYarn
@@ -57,6 +57,10 @@ async function install(context) {
     overwrite: true,
     matching: '!*.ejs'
   })
+  filesystem.copy(`${__dirname}/boilerplate/bin`, `${process.cwd()}/bin`, {
+    overwrite: true,
+    matching: '!*.ejs',
+  })
   filesystem.copy(`${__dirname}/boilerplate/storybook`, `${process.cwd()}/storybook`, {
     overwrite: true,
     matching: '!*.ejs'
@@ -77,11 +81,12 @@ async function install(context) {
   // generate some templates
   spinner.text = '▸ generating files'
   const templates = [
-    { template: 'index.js.ejs', target: 'index.js' },
+    { template: 'index.js', target: 'index.js' },
+    { template: 'react-native.config.js', target: 'react-native.config.js' },
     { template: 'README.md', target: 'README.md' },
     { template: 'ignite.json.ejs', target: 'ignite/ignite.json' },
+    { template: '.eslintignore', target: '.eslintignore' },
     { template: '.editorconfig', target: '.editorconfig' },
-    { template: '.babelrc', target: '.babelrc' },
     { template: 'Tests/Setup.js.ejs', target: 'Tests/Setup.js' },
     { template: 'storybook/storybook.ejs', target: 'storybook/storybook.js' },
     { template: '.env.example', target: '.env.example' }
@@ -92,7 +97,7 @@ async function install(context) {
     reactNativeVersion: rnInstall.version,
     vectorIcons: answers['vector-icons'],
     animatable: answers['animatable'],
-    i18n: answers['i18n']
+    // i18n: answers['i18n']
   }
   await ignite.copyBatch(context, templates, templateProps, {
     quiet: !parameters.options.debug,
@@ -131,12 +136,6 @@ async function install(context) {
 
   spinner.stop()
 
-  // react native link -- must use spawn & stdio: ignore or it hangs!! :(
-  spinner.text = `▸ linking native libraries`
-  spinner.start()
-  await system.spawn('npx react-native link', { stdio: 'ignore' })
-  spinner.stop()
-
   // pass long the debug flag if we're running in that mode
   const debugFlag = parameters.options.debug ? '--debug' : ''
 
@@ -151,8 +150,8 @@ async function install(context) {
     await system.spawn(`npx ignite-cli add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
 
     // now run install of Ignite Plugins
-    await ignite.addModule('react-navigation', { version: '3.11.0' })
-    await ignite.addModule('react-native-gesture-handler', { version: '1.3.0', link: true })
+    // await ignite.addModule('react-navigation', { version: '^3.11.0' })
+    // await ignite.addModule('react-native-gesture-handler', { version: '1.0.9', link: true })
 
     ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
       after: 'import com.facebook.react.ReactActivity;',
@@ -181,10 +180,6 @@ async function install(context) {
       })
     }
 
-    if (answers['i18n'] === 'react-native-i18n') {
-      await system.spawn(`npx ignite-cli add i18n@1.2.0 ${debugFlag}`, { stdio: 'inherit' })
-    }
-
     if (answers['animatable'] === 'react-native-animatable') {
       await system.spawn(`npx ignite-cli add animatable@1.0.2 ${debugFlag}`, {
         stdio: 'inherit'
@@ -193,11 +188,11 @@ async function install(context) {
 
     // dev-screens be installed after vector-icons and animatable so that it can
     // conditionally patch its PluginExamplesScreen
-    if (answers['dev-screens'] === 'Yes') {
-      await system.spawn(`npx ignite-cli add dev-screens@"2.4.5" ${debugFlag}`, {
-        stdio: 'inherit'
-      })
-    }
+    // if (answers['dev-screens'] === 'Yes') {
+    //   await system.spawn(`ignite add dev-screens@"2.4.5" ${debugFlag}`, {
+    //     stdio: 'inherit'
+    //   })
+    // }
 
     if (answers['redux-persist'] === 'Yes') {
       await system.spawn(`npx ignite-cli add redux-persist@1.1.2 ${debugFlag}`, {
@@ -205,16 +200,20 @@ async function install(context) {
       })
     }
 
-    if (parameters.options.lint !== false) {
-      await system.spawn(`npx ignite-cli add standard@1.0.0 ${debugFlag}`, {
-        stdio: 'inherit'
-      })
-    }
+    // if (parameters.options.lint !== false) {
+    //   await system.spawn(`ignite add standard@1.0.0 ${debugFlag}`, {
+    //     stdio: 'inherit'
+    //   })
+    // }
   } catch (e) {
     ignite.log(e)
     throw e
   }
-
+  // react native link -- must use spawn & stdio: ignore or it hangs!! :(
+  spinner.text = '▸ linking native libraries';
+  spinner.start();
+  await system.spawn('react-native link', {stdio: 'ignore'});
+  spinner.stop();
   // git configuration
   const gitExists = await filesystem.exists('./.git')
   if (!gitExists && !parameters.options['skip-git'] && system.which('git')) {
