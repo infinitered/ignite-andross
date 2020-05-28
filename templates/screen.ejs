@@ -19,12 +19,15 @@ class <%= props.name %> extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(<%= props.name %>);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(<%= props.name %>);

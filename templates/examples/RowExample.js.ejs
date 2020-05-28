@@ -104,14 +104,17 @@ class RowExample extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     // ...redux state to props here
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RowExample);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(RowExample);

@@ -24,7 +24,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Selectors ------------- */
 
 export const <%= props.name %>Selectors = {
-  getData: (state) => state.data,
+  getData: state => state.data,
 };
 
 /* ------------- Reducers ------------- */
@@ -40,7 +40,7 @@ export const success = (state, action) => {
 };
 
 // Something went wrong somewhere.
-export const failure = (state) =>
+export const failure = state =>
   state.merge({fetching: false, error: true, payload: null});
 
 /* ------------- Hookup Reducers To Types ------------- */

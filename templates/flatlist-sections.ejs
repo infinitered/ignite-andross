@@ -175,14 +175,17 @@ class <%= props.name %> extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     // ...redux state to props here
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(<%= props.name %>);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(<%= props.name %>);

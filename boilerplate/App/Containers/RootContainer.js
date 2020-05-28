@@ -41,7 +41,7 @@ const RootContainer = () => {
    * Persist State
    */
   const routeNameRef = useRef();
-  const onNavigationStateChange = (state) => {
+  const onNavigationStateChange = state => {
     const previousRouteName = routeNameRef.current;
     const currentRouteName = getActiveRouteName(state);
 
