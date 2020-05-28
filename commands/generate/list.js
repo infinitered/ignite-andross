@@ -60,14 +60,16 @@ module.exports = {
     let componentTemplate =
       dataType.toLowerCase() === 'sectioned' ? typeCode + '-sections' : typeCode
     let styleTemplate = ''
-    /*
-     * The following mess is because FlatList supports numColumns
-     * where SectionList does not.
-     */
-    if (type.toLowerCase() === 'grid') {
+    if (type.toLowerCase() === 'grid' && dataType.toLowerCase() === 'sectioned') {
+      // grid + section means we need wrap
+      styleTemplate = 'listview-grid-style'
+    } else if (type.toLowerCase() === 'grid') {
       componentTemplate = componentTemplate + '-grid'
       // grid + single = no wrap, use columns
       styleTemplate = 'flatlist-grid-style'
+    } else {
+      // no grids, flatlist basic
+      styleTemplate = 'listview-style'
     }
 
     const jobs = [
