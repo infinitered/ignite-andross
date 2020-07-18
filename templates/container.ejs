@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { ScrollView, Text } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
@@ -7,20 +7,14 @@ import { connect } from 'react-redux'
 // Styles
 import styles from './Styles/<%= props.name %>Style'
 
-class <%= props.name %> extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
-  // }
+const <%= props.name %> = () => {
 
-  render () {
     return (
       <ScrollView style={styles.container}>
         <Text><%= props.name %> Container</Text>
       </ScrollView>
     )
   }
-}
 
 const mapStateToProps = (state) => {
   return {
