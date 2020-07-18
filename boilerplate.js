@@ -132,10 +132,10 @@ async function install(context) {
   spinner.stop()
 
   // react native link -- must use spawn & stdio: ignore or it hangs!! :(
-  spinner.text = `▸ linking native libraries`
-  spinner.start()
-  await system.spawn('npx react-native link', { stdio: 'ignore' })
-  spinner.stop()
+  // spinner.text = `▸ linking native libraries`
+  // spinner.start()
+  // await system.spawn('npx react-native link', { stdio: 'ignore' })
+  // spinner.stop()
 
   // pass long the debug flag if we're running in that mode
   const debugFlag = parameters.options.debug ? '--debug' : ''
@@ -151,8 +151,8 @@ async function install(context) {
     await system.spawn(`npx ignite-cli add ${boilerplate} ${debugFlag}`, { stdio: 'inherit' })
 
     // now run install of Ignite Plugins
-    await ignite.addModule('react-navigation', { version: '3.11.0' })
-    await ignite.addModule('react-native-gesture-handler', { version: '1.3.0', link: true })
+    await ignite.addModule('react-navigation', { version: '4.0.0' })
+    await ignite.addModule('react-native-gesture-handler', { version: '1.6.1', link: true })
 
     ignite.patchInFile(`${process.cwd()}/android/app/src/main/java/com/${name.toLowerCase()}/MainActivity.java`, {
       after: 'import com.facebook.react.ReactActivity;',
@@ -200,7 +200,7 @@ async function install(context) {
     }
 
     if (answers['redux-persist'] === 'Yes') {
-      await system.spawn(`npx ignite-cli add redux-persist@1.1.2 ${debugFlag}`, {
+      await system.spawn(`npx ignite-cli add redux-persist@2.0.0 ${debugFlag}`, {
         stdio: 'inherit'
       })
     }
