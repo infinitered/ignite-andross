@@ -8,13 +8,12 @@ import { connect } from 'react-redux'
 import styles from './Styles/<%= props.name %>Style'
 
 const <%= props.name %> = () => {
-
-    return (
-      <ScrollView style={styles.container}>
-        <Text><%= props.name %> Container</Text>
-      </ScrollView>
-    )
-  }
+  return (
+    <ScrollView style={styles.container}>
+      <Text><%= props.name %> Container</Text>
+    </ScrollView>
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
