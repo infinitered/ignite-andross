@@ -4,13 +4,12 @@ import { View, Text } from 'react-native'
 import styles from './Styles/<%= props.name %>Style'
 
 const <%= props.name %> = () => {
-
-    return (
-      <View style={styles.container}>
-        <Text><%= props.name %> Component</Text>
-      </View>
-    )
-  }
+  return (
+    <View style={styles.container}>
+      <Text><%= props.name %> Component</Text>
+    </View>
+  )
+}
 
 // // Prop type warnings
 // <%= props.name %>.propTypes = {
